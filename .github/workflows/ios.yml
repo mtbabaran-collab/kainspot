@@ -256,9 +256,9 @@ jobs:
           sleep 3
           screencapture -x mac/mac-desktop-start.png
           # Whole-screen video of the Mac while the app runs (fixed length), plus stills every 8 s.
-          screencapture -x -v -V 175 mac/mac-demo.mov > logs/mac-record.log 2>&1 &
+          screencapture -x -v -V 330 mac/mac-demo.mov > logs/mac-record.log 2>&1 &
           REC_PID=$!
-          ( for i in $(seq -w 1 22); do sleep 8; screencapture -x "mac/mac-shot-$i.png"; done ) &
+          ( for i in $(seq -w 1 40); do sleep 8; screencapture -x "mac/mac-shot-$i.png"; done ) &
           SHOTS_PID=$!
           sleep 3
           xcodebuild test-without-building \
