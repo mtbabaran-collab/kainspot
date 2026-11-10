@@ -38,7 +38,7 @@ final class AskViewController: UIViewController {
     private let syncService = SpotSyncService()
 
     private let suggestions = [
-        "1 hr vacant, ₱150, gutom",
+        "2 hrs vacant, ₱200, gutom",
         "Study spot with WiFi",
         "Gym after class",
         "Something fun under ₱300"
@@ -93,7 +93,7 @@ final class AskViewController: UIViewController {
         textView.accessibilityIdentifier = "askTextView"
         textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 96).isActive = true
 
-        placeholderLabel.text = "e.g. 1 hr vacant, ₱150, gutom na ako 😋"
+        placeholderLabel.text = "e.g. 2 hrs vacant, ₱200, gutom na ako 😋"
         placeholderLabel.font = UIFont.systemFont(ofSize: 17)
         placeholderLabel.textColor = Theme.muted
         placeholderLabel.numberOfLines = 0

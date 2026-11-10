@@ -47,13 +47,13 @@ final class SpotDTODecodingTests: XCTestCase {
         XCTAssertThrowsError(try SpotSyncService.decode(data))
     }
 
-    /// The offline fallback file shipped in the app must decode to the 24 spots across all four kinds.
+    /// The offline fallback file shipped in the app must decode to the 30 verified real places across all four kinds.
     func testBundledSpotsJSONDecodes() throws {
         let bundle = Bundle(for: SpotSyncService.self)
         let url = try XCTUnwrap(bundle.url(forResource: "spots", withExtension: "json"),
                                 "spots.json should be copied into the app bundle")
         let spots = try SpotSyncService.decode(Data(contentsOf: url))
-        XCTAssertEqual(spots.count, 24)
+        XCTAssertEqual(spots.count, 30)
         XCTAssertTrue(spots.contains { $0.isTrending })
         XCTAssertTrue(spots.allSatisfy { (1...3).contains($0.priceLevel) })
 
@@ -62,11 +62,10 @@ final class SpotDTODecodingTests: XCTestCase {
         XCTAssertTrue(spots.allSatisfy { (0...24).contains($0.openHour) && (0...24).contains($0.closeHour) })
         XCTAssertTrue(spots.allSatisfy { $0.avgSpend >= 0 && $0.stayMinutes > 0 && !$0.emoji.isEmpty })
 
-        // The original 10 ids are kept so saved photos ("spot-<id>.jpg") still match their spot.
+        // Ids kept from the first version (places re-verified as still open) so saved photos ("spot-<id>.jpg") still match.
+        // The other first-version places were replaced after an online check (closed, moved or unverifiable).
         let ids = Set(spots.map { $0.id })
-        let originalIDs = ["mang-larrys-isawan", "rodics-diner", "pino-restaurant", "cafe-inggo-1587",
-                           "common-folk-coffee-bar", "olivias-cafe", "up-town-center-food-strip",
-                           "vertis-north-food-court", "cubao-expo", "lemuria"]
+        let originalIDs = ["mang-larrys-isawan", "rodics-diner", "pino-restaurant"]
         for oldID in originalIDs {
             XCTAssertTrue(ids.contains(oldID), "missing original id \(oldID)")
         }

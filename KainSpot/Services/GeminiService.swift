@@ -292,6 +292,8 @@ final class GeminiService {
                 return
             }
             guard (200...299).contains(status) else {
+                // Google explains the refusal in the body (e.g. PERMISSION_DENIED reason); log a short slice, never the key.
+                NSLog("KainSpotAI: error body: %@", String(bodyText.prefix(300)))
                 completion(.failure(GeminiError.badStatus(status)))
                 return
             }

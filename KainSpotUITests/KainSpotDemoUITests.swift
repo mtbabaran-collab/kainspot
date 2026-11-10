@@ -78,8 +78,8 @@ final class KainSpotDemoUITests: XCTestCase {
         let vacantSlider = app.sliders["vacantSlider"]
         if vacantSlider.waitForExistence(timeout: 5) {
             scrollIntoView(vacantSlider, in: app)
-            // 30–240 min: ~0.15 lands near 60 min after snapping to 15-minute steps.
-            vacantSlider.adjust(toNormalizedSliderPosition: 0.15)
+            // 30–240 min: ~0.43 lands near 120 min (a typical long vacant) after snapping to 15-minute steps.
+            vacantSlider.adjust(toNormalizedSliderPosition: 0.43)
             sleep(1)
         }
 
