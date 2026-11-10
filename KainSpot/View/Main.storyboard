@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nav-cn-001">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Nav-sc-001">
+            <objects>
+                <navigationController id="Nav-cn-001" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nav-br-001">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Hom-vc-001" kind="relationship" relationship="rootViewController" id="Nav-sg-001"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nav-fr-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-760" y="0.0"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="Hom-sc-001">
+            <objects>
+                <viewController storyboardIdentifier="HomeViewController" id="Hom-vc-001" customClass="HomeViewController" customModule="KainSpot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hom-vw-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="fill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-st-001">
+                                <rect key="frame" x="24" y="190" width="345" height="560"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-lb-001">
+                                        <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                        <color key="textColor" red="0.12156862745098039" green="0.16078431372549021" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kain Spot" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-lb-002">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                        <color key="textColor" red="0.12156862745098039" green="0.16078431372549021" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi, foodie!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-lb-003">
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <color key="textColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trendy food spots near FEU Diliman" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-lb-004">
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fork.knife.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-iv-001">
+                                        <color key="tintColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="Hom-cn-001"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-bt-001">
+                                        <color key="backgroundColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="findButton"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="Hom-cn-002"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Find Food Spots">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="findSpotsTapped:" destination="Hom-vc-001" eventType="touchUpInside" id="Hom-ac-001"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-bt-002">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="galleryButton"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="Hom-cn-003"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="My Food Gallery">
+                                            <color key="titleColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="galleryTapped:" destination="Hom-vc-001" eventType="touchUpInside" id="Hom-ac-002"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated: never" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hom-lb-005">
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Hom-sa-001"/>
+                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Hom-st-001" firstAttribute="leading" secondItem="Hom-sa-001" secondAttribute="leading" constant="24" id="Hom-cn-004"/>
+                            <constraint firstItem="Hom-sa-001" firstAttribute="trailing" secondItem="Hom-st-001" secondAttribute="trailing" constant="24" id="Hom-cn-005"/>
+                            <constraint firstItem="Hom-st-001" firstAttribute="centerY" secondItem="Hom-sa-001" secondAttribute="centerY" priority="750" id="Hom-cn-006"/>
+                            <constraint firstItem="Hom-st-001" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Hom-sa-001" secondAttribute="top" constant="16" id="Hom-cn-007"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Kain Spot" id="Hom-ni-001"/>
+                    <connections>
+                        <outlet property="titleLabel" destination="Hom-lb-002" id="Hom-ou-001"/>
+                        <outlet property="greetingLabel" destination="Hom-lb-003" id="Hom-ou-002"/>
+                        <outlet property="heroImageView" destination="Hom-iv-001" id="Hom-ou-003"/>
+                        <outlet property="findButton" destination="Hom-bt-001" id="Hom-ou-004"/>
+                        <outlet property="galleryButton" destination="Hom-bt-002" id="Hom-ou-005"/>
+                        <outlet property="lastSyncLabel" destination="Hom-lb-005" id="Hom-ou-006"/>
+                        <segue destination="Prf-vc-001" kind="show" identifier="showPreferences" id="Hom-sg-001"/>
+                        <segue destination="Gal-vc-001" kind="show" identifier="showGallery" id="Hom-sg-002"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hom-fr-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Preferences View Controller-->
+        <scene sceneID="Prf-sc-001">
+            <objects>
+                <viewController storyboardIdentifier="PreferencesViewController" id="Prf-vc-001" customClass="PreferencesViewController" customModule="KainSpot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Prf-vw-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="fill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-st-001">
+                                <rect key="frame" x="24" y="127" width="345" height="480"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell us what you're craving" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-lb-001">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <color key="textColor" red="0.12156862745098039" green="0.16078431372549021" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-lb-002">
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your nickname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-tf-001">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="nicknameField"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Prf-cn-001"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.12156862745098039" green="0.16078431372549021" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-lb-003">
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-sm-001">
+                                        <segments>
+                                            <segment title="Any"/>
+                                            <segment title="₱"/>
+                                            <segment title="₱₱"/>
+                                            <segment title="₱₱₱"/>
+                                        </segments>
+                                        <color key="selectedSegmentTintColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="priceSegment"/>
+                                    </segmentedControl>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-st-002">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="250" verticalHuggingPriority="251" text="Trending only 🔥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-lb-004">
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.12156862745098039" green="0.16078431372549021" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-sw-001">
+                                                <color key="onTintColor" red="0.1803921568627451" green="0.7686274509803922" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="trendingSwitch"/>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-st-003">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="250" verticalHuggingPriority="251" text="Max distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-lb-005">
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Within 5 km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-lb-006">
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <color key="textColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-sl-001">
+                                        <color key="minimumTrackTintColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="distanceSlider"/>
+                                        <connections>
+                                            <action selector="distanceChanged:" destination="Prf-vc-001" eventType="valueChanged" id="Prf-ac-001"/>
+                                        </connections>
+                                    </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-bt-001">
+                                        <color key="backgroundColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="showSpotsButton"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="Prf-cn-002"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Show Spots">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showSpotsTapped:" destination="Prf-vc-001" eventType="touchUpInside" id="Prf-ac-002"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Prf-sa-001"/>
+                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Prf-st-001" firstAttribute="top" secondItem="Prf-sa-001" secondAttribute="top" constant="24" id="Prf-cn-003"/>
+                            <constraint firstItem="Prf-st-001" firstAttribute="leading" secondItem="Prf-sa-001" secondAttribute="leading" constant="24" id="Prf-cn-004"/>
+                            <constraint firstItem="Prf-sa-001" firstAttribute="trailing" secondItem="Prf-st-001" secondAttribute="trailing" constant="24" id="Prf-cn-005"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Plan your kain" id="Prf-ni-001"/>
+                    <connections>
+                        <outlet property="nicknameField" destination="Prf-tf-001" id="Prf-ou-001"/>
+                        <outlet property="priceSegment" destination="Prf-sm-001" id="Prf-ou-002"/>
+                        <outlet property="trendingSwitch" destination="Prf-sw-001" id="Prf-ou-003"/>
+                        <outlet property="distanceSlider" destination="Prf-sl-001" id="Prf-ou-004"/>
+                        <outlet property="distanceValueLabel" destination="Prf-lb-006" id="Prf-ou-005"/>
+                        <outlet property="showSpotsButton" destination="Prf-bt-001" id="Prf-ou-006"/>
+                        <segue destination="Lst-vc-001" kind="show" identifier="showSpotList" id="Prf-sg-001"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Prf-fr-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="760" y="0.0"/>
+        </scene>
+        <!--Spot List View Controller-->
+        <scene sceneID="Lst-sc-001">
+            <objects>
+                <viewController storyboardIdentifier="SpotListViewController" id="Lst-vc-001" customClass="SpotListViewController" customModule="KainSpot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lst-vw-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="fill" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-st-001">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <subviews>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offline — showing saved spots" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-lb-001">
+                                        <color key="backgroundColor" red="0.8784313725490196" green="0.32156862745098042" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="Lst-cn-001"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="96" estimatedRowHeight="96" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-tv-001">
+                                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="spotsTable"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="none" indentationWidth="10" reuseIdentifier="SpotCell" rowHeight="96" id="Lst-cl-001" customClass="SpotCell" customModule="KainSpot" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="50" width="393" height="96"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lst-cl-001" id="Lst-cv-001">
+                                                    <rect key="frame" x="0.0" y="0.0" width="393" height="96"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-vw-002">
+                                                            <rect key="frame" x="16" y="6" width="361" height="84"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="12" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-st-002">
+                                                                    <rect key="frame" x="12" y="12" width="337" height="60"/>
+                                                                    <subviews>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fork.knife" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-iv-001">
+                                                                            <color key="tintColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="60" id="Lst-cn-018"/>
+                                                                                <constraint firstAttribute="height" constant="60" id="Lst-cn-019"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="fill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-st-003">
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spot name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-lb-003">
+                                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                                                    <color key="textColor" red="0.12156862745098039" green="0.16078431372549021" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-lb-004">
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                    <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-st-004">
+                                                                                    <subviews>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="₱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-lb-005">
+                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                                                            <color key="textColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="250" verticalHuggingPriority="251" text="1.0 km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-lb-006">
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                            <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="🔥 Trending" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-lb-007">
+                                                                                            <color key="backgroundColor" red="0.1803921568627451" green="0.7686274509803922" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="height" constant="22" id="Lst-cn-020"/>
+                                                                                            </constraints>
+                                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                    </subviews>
+                                                                                </stackView>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstItem="Lst-st-002" firstAttribute="top" secondItem="Lst-vw-002" secondAttribute="top" constant="12" id="Lst-cn-014"/>
+                                                                <constraint firstItem="Lst-st-002" firstAttribute="leading" secondItem="Lst-vw-002" secondAttribute="leading" constant="12" id="Lst-cn-015"/>
+                                                                <constraint firstItem="Lst-vw-002" firstAttribute="trailing" secondItem="Lst-st-002" secondAttribute="trailing" constant="12" id="Lst-cn-016"/>
+                                                                <constraint firstItem="Lst-vw-002" firstAttribute="bottom" secondItem="Lst-st-002" secondAttribute="bottom" constant="12" id="Lst-cn-017"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Lst-vw-002" firstAttribute="top" secondItem="Lst-cv-001" secondAttribute="top" constant="6" id="Lst-cn-010"/>
+                                                        <constraint firstItem="Lst-vw-002" firstAttribute="leading" secondItem="Lst-cv-001" secondAttribute="leading" constant="16" id="Lst-cn-011"/>
+                                                        <constraint firstItem="Lst-cv-001" firstAttribute="trailing" secondItem="Lst-vw-002" secondAttribute="trailing" constant="16" id="Lst-cn-012"/>
+                                                        <constraint firstItem="Lst-cv-001" firstAttribute="bottom" secondItem="Lst-vw-002" secondAttribute="bottom" constant="6" id="Lst-cn-013"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="cardView" destination="Lst-vw-002" id="Lst-ou-007"/>
+                                                    <outlet property="nameLabel" destination="Lst-lb-003" id="Lst-ou-001"/>
+                                                    <outlet property="categoryLabel" destination="Lst-lb-004" id="Lst-ou-002"/>
+                                                    <outlet property="priceLabel" destination="Lst-lb-005" id="Lst-ou-003"/>
+                                                    <outlet property="distanceLabel" destination="Lst-lb-006" id="Lst-ou-004"/>
+                                                    <outlet property="trendingBadge" destination="Lst-lb-007" id="Lst-ou-005"/>
+                                                    <outlet property="thumbImageView" destination="Lst-iv-001" id="Lst-ou-006"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No spots match — try a wider distance." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-lb-002">
+                                <rect key="frame" x="32" y="460" width="329" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Lst-sa-001"/>
+                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Lst-st-001" firstAttribute="top" secondItem="Lst-sa-001" secondAttribute="top" id="Lst-cn-002"/>
+                            <constraint firstItem="Lst-st-001" firstAttribute="leading" secondItem="Lst-sa-001" secondAttribute="leading" id="Lst-cn-003"/>
+                            <constraint firstItem="Lst-sa-001" firstAttribute="trailing" secondItem="Lst-st-001" secondAttribute="trailing" id="Lst-cn-004"/>
+                            <constraint firstItem="Lst-vw-001" firstAttribute="bottom" secondItem="Lst-st-001" secondAttribute="bottom" id="Lst-cn-005"/>
+                            <constraint firstItem="Lst-lb-002" firstAttribute="centerY" secondItem="Lst-sa-001" secondAttribute="centerY" id="Lst-cn-006"/>
+                            <constraint firstItem="Lst-lb-002" firstAttribute="leading" secondItem="Lst-sa-001" secondAttribute="leading" constant="32" id="Lst-cn-007"/>
+                            <constraint firstItem="Lst-sa-001" firstAttribute="trailing" secondItem="Lst-lb-002" secondAttribute="trailing" constant="32" id="Lst-cn-008"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Spots" id="Lst-ni-001"/>
+                    <connections>
+                        <outlet property="tableView" destination="Lst-tv-001" id="Lst-ou-008"/>
+                        <outlet property="emptyLabel" destination="Lst-lb-002" id="Lst-ou-009"/>
+                        <outlet property="bannerLabel" destination="Lst-lb-001" id="Lst-ou-010"/>
+                        <segue destination="Dtl-vc-001" kind="show" identifier="showSpotDetail" id="Lst-sg-001"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lst-fr-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1520" y="0.0"/>
+        </scene>
+        <!--Spot Detail View Controller-->
+        <scene sceneID="Dtl-sc-001">
+            <objects>
+                <viewController storyboardIdentifier="SpotDetailViewController" id="Dtl-vc-001" customClass="SpotDetailViewController" customModule="KainSpot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dtl-vw-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-sv-001">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="fill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-st-001">
+                                        <rect key="frame" x="16" y="16" width="361" height="760"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-iv-001">
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="Dtl-cn-010"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-bt-001">
+                                                <color key="backgroundColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="photoButton"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="Dtl-cn-011"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <state key="normal" title="Add My Photo">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addPhotoTapped:" destination="Dtl-vc-001" eventType="touchUpInside" id="Dtl-ac-001"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spot name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-lb-001">
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                                <color key="textColor" red="0.12156862745098039" green="0.16078431372549021" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category · ₱ · ★ 4.5" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-lb-002">
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                <color key="textColor" red="1" green="0.41960784313725491" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blurb" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-lb-003">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.12156862745098039" green="0.16078431372549021" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-lb-004">
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 km from FEU Diliman" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-lb-005">
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                <color key="textColor" red="0.12156862745098039" green="0.16078431372549021" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finding your location…" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-lb-006">
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-mv-001">
+                                                <accessibility key="accessibilityConfiguration" identifier="spotMap"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="220" id="Dtl-cn-012"/>
+                                                </constraints>
+                                            </mapView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Dtl-st-001" firstAttribute="top" secondItem="Dtl-lg-001" secondAttribute="top" constant="16" id="Dtl-cn-005"/>
+                                    <constraint firstItem="Dtl-st-001" firstAttribute="leading" secondItem="Dtl-lg-001" secondAttribute="leading" constant="16" id="Dtl-cn-006"/>
+                                    <constraint firstItem="Dtl-lg-001" firstAttribute="trailing" secondItem="Dtl-st-001" secondAttribute="trailing" constant="16" id="Dtl-cn-007"/>
+                                    <constraint firstItem="Dtl-lg-001" firstAttribute="bottom" secondItem="Dtl-st-001" secondAttribute="bottom" constant="24" id="Dtl-cn-008"/>
+                                    <constraint firstItem="Dtl-st-001" firstAttribute="width" secondItem="Dtl-lg-002" secondAttribute="width" constant="-32" id="Dtl-cn-009"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Dtl-lg-001"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Dtl-lg-002"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Dtl-sa-001"/>
+                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Dtl-sv-001" firstAttribute="top" secondItem="Dtl-sa-001" secondAttribute="top" id="Dtl-cn-001"/>
+                            <constraint firstItem="Dtl-sv-001" firstAttribute="leading" secondItem="Dtl-sa-001" secondAttribute="leading" id="Dtl-cn-002"/>
+                            <constraint firstItem="Dtl-sa-001" firstAttribute="trailing" secondItem="Dtl-sv-001" secondAttribute="trailing" id="Dtl-cn-003"/>
+                            <constraint firstItem="Dtl-vw-001" firstAttribute="bottom" secondItem="Dtl-sv-001" secondAttribute="bottom" id="Dtl-cn-004"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Spot" id="Dtl-ni-001"/>
+                    <connections>
+                        <outlet property="photoImageView" destination="Dtl-iv-001" id="Dtl-ou-001"/>
+                        <outlet property="nameLabel" destination="Dtl-lb-001" id="Dtl-ou-002"/>
+                        <outlet property="metaLabel" destination="Dtl-lb-002" id="Dtl-ou-003"/>
+                        <outlet property="blurbLabel" destination="Dtl-lb-003" id="Dtl-ou-004"/>
+                        <outlet property="addressLabel" destination="Dtl-lb-004" id="Dtl-ou-005"/>
+                        <outlet property="distanceLabel" destination="Dtl-lb-005" id="Dtl-ou-006"/>
+                        <outlet property="userDistanceLabel" destination="Dtl-lb-006" id="Dtl-ou-007"/>
+                        <outlet property="mapView" destination="Dtl-mv-001" id="Dtl-ou-008"/>
+                        <outlet property="photoButton" destination="Dtl-bt-001" id="Dtl-ou-009"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dtl-fr-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2280" y="0.0"/>
+        </scene>
+        <!--Gallery View Controller-->
+        <scene sceneID="Gal-sc-001">
+            <objects>
+                <viewController storyboardIdentifier="GalleryViewController" id="Gal-vc-001" customClass="GalleryViewController" customModule="KainSpot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gal-vw-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Gal-cv-001">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" identifier="galleryGrid"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="Gal-fl-001">
+                                    <size key="itemSize" width="129" height="129"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryCell" id="Gal-cl-001" customClass="GalleryCell" customModule="KainSpot" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="129" height="129"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Gal-cc-001">
+                                            <rect key="frame" x="0.0" y="0.0" width="129" height="129"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gal-iv-001">
+                                                    <rect key="frame" x="0.0" y="0.0" width="129" height="129"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Gal-iv-001" firstAttribute="top" secondItem="Gal-cc-001" secondAttribute="top" id="Gal-cn-005"/>
+                                                <constraint firstItem="Gal-iv-001" firstAttribute="leading" secondItem="Gal-cc-001" secondAttribute="leading" id="Gal-cn-006"/>
+                                                <constraint firstItem="Gal-cc-001" firstAttribute="trailing" secondItem="Gal-iv-001" secondAttribute="trailing" id="Gal-cn-007"/>
+                                                <constraint firstItem="Gal-cc-001" firstAttribute="bottom" secondItem="Gal-iv-001" secondAttribute="bottom" id="Gal-cn-008"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="Gal-iv-001" id="Gal-ou-003"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No food pics yet — tap + to add your kain moments 📸" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gal-lb-001">
+                                <rect key="frame" x="32" y="460" width="329" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.41960784313725491" green="0.44705882352941179" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gal-sa-001"/>
+                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Gal-cv-001" firstAttribute="top" secondItem="Gal-sa-001" secondAttribute="top" id="Gal-cn-001"/>
+                            <constraint firstItem="Gal-cv-001" firstAttribute="leading" secondItem="Gal-sa-001" secondAttribute="leading" id="Gal-cn-002"/>
+                            <constraint firstItem="Gal-sa-001" firstAttribute="trailing" secondItem="Gal-cv-001" secondAttribute="trailing" id="Gal-cn-003"/>
+                            <constraint firstItem="Gal-vw-001" firstAttribute="bottom" secondItem="Gal-cv-001" secondAttribute="bottom" id="Gal-cn-004"/>
+                            <constraint firstItem="Gal-lb-001" firstAttribute="centerY" secondItem="Gal-sa-001" secondAttribute="centerY" id="Gal-cn-009"/>
+                            <constraint firstItem="Gal-lb-001" firstAttribute="leading" secondItem="Gal-sa-001" secondAttribute="leading" constant="32" id="Gal-cn-010"/>
+                            <constraint firstItem="Gal-sa-001" firstAttribute="trailing" secondItem="Gal-lb-001" secondAttribute="trailing" constant="32" id="Gal-cn-011"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="My Food Gallery" id="Gal-ni-001"/>
+                    <connections>
+                        <outlet property="collectionView" destination="Gal-cv-001" id="Gal-ou-001"/>
+                        <outlet property="emptyLabel" destination="Gal-lb-001" id="Gal-ou-002"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gal-fr-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="760" y="900"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fork.knife" catalog="system" width="128" height="122"/>
+        <image name="fork.knife.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
+    </resources>
+</document>

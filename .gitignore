@@ -1,0 +1,20 @@
+# Xcode per-user and build output
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.xcresult
+xcresults.zip
+
+# CI scratch output
+logs/
+out/
+sample-photos/
+demo.mp4
+
+# macOS
+.DS_Store
+
+# local planning notes
+SPEC.md
+docs/

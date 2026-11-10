@@ -1,0 +1,96 @@
+# project.yml — XcodeGen definition for Kain Spot.
+# Run `xcodegen generate` (on a Mac) to produce KainSpot.xcodeproj.
+# Everything inside KainSpot/ is picked up automatically: .swift files are compiled,
+# KainSpot.xcdatamodeld is compiled as a Core Data model, and the storyboards,
+# spots.json and Assets.xcassets are copied as bundle resources.
+name: KainSpot
+
+options:
+  bundleIdPrefix: com.kainspot
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "16"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  KainSpot:
+    type: application
+    platform: iOS
+    sources:
+      - path: KainSpot
+    settings:
+      base:
+        INFOPLIST_FILE: KainSpot/App/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        PRODUCT_BUNDLE_IDENTIFIER: com.kainspot.KainSpot
+        PRODUCT_NAME: KainSpot
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_STYLE: Automatic
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+
+  KainSpotTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: KainSpotTests
+    dependencies:
+      - target: KainSpot
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.kainspot.KainSpotTests
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_STYLE: Automatic
+        IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+        # TEST_HOST / BUNDLE_LOADER are filled in by XcodeGen from the KainSpot dependency.
+
+  KainSpotUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: KainSpotUITests
+    dependencies:
+      - target: KainSpot
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.kainspot.KainSpotUITests
+        TEST_TARGET_NAME: KainSpot
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_STYLE: Automatic
+        IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+
+schemes:
+  KainSpot:
+    build:
+      targets:
+        KainSpot: all
+        KainSpotTests: [test]
+        KainSpotUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: KainSpotTests
+          parallelizable: false
+        - name: KainSpotUITests
+          parallelizable: false
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
