@@ -1,0 +1,271 @@
+# ios.yml — builds and tests Kain Spot on a GitHub-hosted Mac, then records the demo.
+# Outputs (artifact "kainspot-output"): demo.mp4 screen recording, exported screenshots,
+# zipped .xcresult bundles, xcodebuild logs, and the generated KainSpot.xcodeproj
+# (so the real project file can be committed back to the repo).
+# Unit-test failures fail the job; UI test / video / screenshot steps are best-effort.
+name: iOS build, test and demo
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-test-demo:
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_INSTALL_CLEANUP: "1"
+      DERIVED_DATA: build/DerivedData
+      APP_BUNDLE_ID: com.kainspot.KainSpot
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select latest Xcode 16.x
+        run: |
+          XCODE_APP=$(ls -d /Applications/Xcode_16*.app | sort -V | tail -1)
+          echo "Using $XCODE_APP"
+          sudo xcode-select -s "$XCODE_APP/Contents/Developer"
+          xcodebuild -version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate KainSpot.xcodeproj
+        run: xcodegen generate
+
+      - name: List available simulators
+        run: xcrun simctl list devices available
+
+      - name: Pick iPhone 16 Pro and iPhone SE simulators
+        run: |
+          python3 - <<'PY'
+          import json, os, re, subprocess, sys
+
+          raw = subprocess.check_output(["xcrun", "simctl", "list", "devices", "available", "-j"])
+          data = json.loads(raw)
+
+          # Collect (iOS version, name, udid) for every available iOS device, newest runtime first.
+          devices = []
+          for runtime, entries in data.get("devices", {}).items():
+              if "iOS" not in runtime:
+                  continue
+              m = re.search(r"iOS-(\d+)-(\d+)", runtime)
+              version = (int(m.group(1)), int(m.group(2))) if m else (0, 0)
+              for d in entries:
+                  if d.get("isAvailable", True):
+                      devices.append((version, d["name"], d["udid"]))
+          devices.sort(key=lambda t: t[0], reverse=True)
+
+          def pick(pred):
+              for _, name, udid in devices:
+                  if pred(name):
+                      return udid, name
+              return None, None
+
+          pro, pro_name = pick(lambda n: n == "iPhone 16 Pro")
+          if not pro:
+              pro, pro_name = pick(lambda n: n.startswith("iPhone") and "Pro" in n)
+          se, se_name = pick(lambda n: n == "iPhone SE (3rd generation)")
+          if not se:
+              se, se_name = pick(lambda n: n.startswith("iPhone SE"))
+
+          if not pro:
+              print("No iPhone Pro simulator available", file=sys.stderr)
+              sys.exit(1)
+          if not se:
+              print("No iPhone SE simulator found; reusing the Pro simulator for the small-screen shot")
+              se, se_name = pro, pro_name
+
+          print(f"PRO: {pro_name} {pro}")
+          print(f"SE:  {se_name} {se}")
+          with open(os.environ["GITHUB_ENV"], "a") as env:
+              env.write(f"PRO_UDID={pro}\nPRO_NAME={pro_name}\nSE_UDID={se}\nSE_NAME={se_name}\n")
+          PY
+
+      - name: Build for testing
+        run: |
+          set -o pipefail
+          mkdir -p logs results out
+          xcodebuild build-for-testing \
+            -project KainSpot.xcodeproj \
+            -scheme KainSpot \
+            -destination "id=$PRO_UDID" \
+            -derivedDataPath "$DERIVED_DATA" \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee logs/build-for-testing.log
+
+      - name: Unit tests
+        run: |
+          set -o pipefail
+          xcodebuild test-without-building \
+            -project KainSpot.xcodeproj \
+            -scheme KainSpot \
+            -destination "id=$PRO_UDID" \
+            -derivedDataPath "$DERIVED_DATA" \
+            -only-testing:KainSpotTests \
+            -parallel-testing-enabled NO \
+            -resultBundlePath results/UnitTests.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee logs/unit-tests.log
+
+      - name: Prepare demo simulator (boot, permissions, location)
+        continue-on-error: true
+        run: |
+          xcrun simctl boot "$PRO_UDID" || true
+          xcrun simctl bootstatus "$PRO_UDID" -b
+          xcrun simctl status_bar "$PRO_UDID" override --time "9:41" --batteryState charged --batteryLevel 100 || true
+          xcrun simctl privacy "$PRO_UDID" grant location "$APP_BUNDLE_ID" || true
+          xcrun simctl privacy "$PRO_UDID" grant photos "$APP_BUNDLE_ID" || true
+          # FEU Diliman (same fixed point the app uses in DistanceCalculator.feuDiliman).
+          xcrun simctl location "$PRO_UDID" set 14.68444,121.06333 || true
+
+      - name: Add sample photos to the demo simulator
+        continue-on-error: true
+        run: |
+          mkdir -p sample-photos
+          # Pure-python BMP writer (no PIL needed), then sips converts each BMP to JPEG.
+          python3 - <<'PY'
+          import struct
+          colors = [(255,107,53), (46,196,182), (255,190,92), (224,82,29), (120,200,120), (90,140,230)]
+          w = h = 360
+          pad = (4 - (w * 3) % 4) % 4
+          for i, (r, g, b) in enumerate(colors, start=1):
+              rows = bytearray()
+              for y in range(h):
+                  shade = 0.6 + 0.4 * y / h
+                  px = bytes((int(b * shade), int(g * shade), int(r * shade)))
+                  rows += px * w + b"\x00" * pad
+              header = b"BM" + struct.pack("<IHHI", 54 + len(rows), 0, 0, 54)
+              info = struct.pack("<IiiHHIIiiII", 40, w, h, 1, 24, 0, len(rows), 2835, 2835, 0, 0)
+              with open(f"sample-photos/food-{i}.bmp", "wb") as f:
+                  f.write(header + info + rows)
+          PY
+          for bmp in sample-photos/*.bmp; do
+            sips -s format jpeg "$bmp" --out "${bmp%.bmp}.jpg" >/dev/null || true
+          done
+          # Fallback: system desktop pictures if the BMP route produced nothing.
+          if ! ls sample-photos/*.jpg >/dev/null 2>&1; then
+            n=0
+            for pic in /System/Library/Desktop\ Pictures/*.heic /System/Library/Desktop\ Pictures/*.png; do
+              [ -f "$pic" ] || continue
+              n=$((n+1))
+              sips -s format jpeg "$pic" --out "sample-photos/food-$n.jpg" >/dev/null || true
+              [ "$n" -ge 6 ] && break
+            done
+          fi
+          ls -la sample-photos
+          xcrun simctl addmedia "$PRO_UDID" sample-photos/*.jpg
+
+      - name: Record demo walkthrough (UI test + video)
+        continue-on-error: true
+        run: |
+          set +e
+          set -o pipefail
+          xcrun simctl io "$PRO_UDID" recordVideo --codec h264 --force demo.mp4 > logs/record-video.log 2>&1 &
+          REC_PID=$!
+          sleep 3
+          xcodebuild test-without-building \
+            -project KainSpot.xcodeproj \
+            -scheme KainSpot \
+            -destination "id=$PRO_UDID" \
+            -derivedDataPath "$DERIVED_DATA" \
+            -only-testing:KainSpotUITests/KainSpotDemoUITests/testFullDemoWalkthrough \
+            -parallel-testing-enabled NO \
+            -resultBundlePath results/DemoWalkthrough.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee logs/ui-demo.log
+          STATUS=$?
+          # SIGINT lets simctl finalize the mp4 container; give it time to flush.
+          kill -INT "$REC_PID" || true
+          sleep 3
+          wait "$REC_PID" || true
+          ls -la demo.mp4 || true
+          exit $STATUS
+
+      - name: Home screenshot on iPhone SE
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          xcodebuild test-without-building \
+            -project KainSpot.xcodeproj \
+            -scheme KainSpot \
+            -destination "id=$SE_UDID" \
+            -derivedDataPath "$DERIVED_DATA" \
+            -only-testing:KainSpotUITests/KainSpotDemoUITests/testHomeScreenshot \
+            -parallel-testing-enabled NO \
+            -resultBundlePath results/Home-SE.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee logs/ui-home-se.log
+
+      - name: Home screenshot on iPhone 16 Pro
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          xcodebuild test-without-building \
+            -project KainSpot.xcodeproj \
+            -scheme KainSpot \
+            -destination "id=$PRO_UDID" \
+            -derivedDataPath "$DERIVED_DATA" \
+            -only-testing:KainSpotUITests/KainSpotDemoUITests/testHomeScreenshot \
+            -parallel-testing-enabled NO \
+            -resultBundlePath results/Home-Pro.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee logs/ui-home-pro.log
+
+      - name: Export screenshot attachments from result bundles
+        if: always()
+        continue-on-error: true
+        run: |
+          mkdir -p out
+          for bundle in results/*.xcresult; do
+            [ -d "$bundle" ] || continue
+            name=$(basename "$bundle" .xcresult)
+            mkdir -p "out/$name"
+            xcrun xcresulttool export attachments --path "$bundle" --output-path "out/$name" \
+              || echo "Attachment export failed for $bundle"
+          done
+          ls -R out || true
+
+      - name: Fallback screenshots via simctl
+        if: always()
+        continue-on-error: true
+        run: |
+          mkdir -p out/simctl
+          for pair in "se:$SE_UDID" "pro:$PRO_UDID"; do
+            label=${pair%%:*}
+            udid=${pair#*:}
+            [ -n "$udid" ] || continue
+            xcrun simctl boot "$udid" || true
+            xcrun simctl bootstatus "$udid" -b || true
+            xcrun simctl terminate "$udid" "$APP_BUNDLE_ID" || true
+            xcrun simctl launch "$udid" "$APP_BUNDLE_ID" || continue
+            sleep 6
+            xcrun simctl io "$udid" screenshot "out/simctl/home-$label.png" || true
+          done
+
+      - name: Zip result bundles
+        if: always()
+        continue-on-error: true
+        run: |
+          if [ -d results ] && ls results/*.xcresult >/dev/null 2>&1; then
+            ditto -c -k --keepParent results xcresults.zip
+          fi
+
+      - name: Upload outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kainspot-output
+          if-no-files-found: warn
+          path: |
+            demo.mp4
+            out/**
+            xcresults.zip
+            logs/**
+            KainSpot.xcodeproj
