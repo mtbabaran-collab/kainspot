@@ -8,7 +8,8 @@
 
 import Foundation
 
-/// Remembers the last SpotFilter (nickname, price, trending, distance) and the last sync time.
+/// Remembers the last SpotFilter (nickname, price, trending, distance, plus the Vacant Planner choices)
+/// and the last sync time.
 /// Use `UserPrefs.shared` in the app; tests inject their own `UserDefaults(suiteName:)`.
 final class UserPrefs {
 
@@ -21,6 +22,12 @@ final class UserPrefs {
         static let trendingOnly = "ks.trendingOnly"
         static let maxDistanceKm = "ks.maxDistanceKm"
         static let lastSync = "ks.lastSync"
+        // Vacant Planner choices.
+        static let kind = "ks.kind"
+        static let maxSpend = "ks.maxSpend"
+        static let vacantMinutes = "ks.vacantMinutes"
+        static let needsWifi = "ks.needsWifi"
+        static let studentDiscount = "ks.studentDiscount"
     }
 
     private let defaults: UserDefaults
@@ -37,6 +44,16 @@ final class UserPrefs {
         defaults.set(Int(filter.maxPrice), forKey: Key.maxPrice)
         defaults.set(filter.trendingOnly, forKey: Key.trendingOnly)
         defaults.set(filter.maxDistanceKm, forKey: Key.maxDistanceKm)
+        // nil kind means "all kinds", stored as a missing key.
+        if let kind = filter.kind, !kind.isEmpty {
+            defaults.set(kind, forKey: Key.kind)
+        } else {
+            defaults.removeObject(forKey: Key.kind)
+        }
+        defaults.set(filter.maxSpend, forKey: Key.maxSpend)
+        defaults.set(filter.vacantMinutes, forKey: Key.vacantMinutes)
+        defaults.set(filter.needsWifi, forKey: Key.needsWifi)
+        defaults.set(filter.studentDiscount, forKey: Key.studentDiscount)
     }
 
     /// Rebuilds the saved filter. Missing keys fall back to `SpotFilter.default`, and odd stored values
@@ -57,7 +74,34 @@ final class UserPrefs {
             maxDistanceKm = stored
         }
 
-        return SpotFilter(nickname: nickname, maxPrice: maxPrice, trendingOnly: trendingOnly, maxDistanceKm: maxDistanceKm)
+        // Vacant Planner values: an unknown kind, a negative budget or a non-positive vacant fall back to defaults.
+        var kind = fallback.kind
+        if let stored = defaults.string(forKey: Key.kind), SpotKind(rawValue: stored) != nil {
+            kind = stored
+        }
+
+        var maxSpend = fallback.maxSpend
+        if let stored = defaults.object(forKey: Key.maxSpend) as? Int, stored >= 0 {
+            maxSpend = stored
+        }
+
+        var vacantMinutes = fallback.vacantMinutes
+        if let stored = defaults.object(forKey: Key.vacantMinutes) as? Int, stored > 0 {
+            vacantMinutes = stored
+        }
+
+        let needsWifi = defaults.object(forKey: Key.needsWifi) as? Bool ?? fallback.needsWifi
+        let studentDiscount = defaults.object(forKey: Key.studentDiscount) as? Bool ?? fallback.studentDiscount
+
+        return SpotFilter(nickname: nickname,
+                          maxPrice: maxPrice,
+                          trendingOnly: trendingOnly,
+                          maxDistanceKm: maxDistanceKm,
+                          kind: kind,
+                          maxSpend: maxSpend,
+                          vacantMinutes: vacantMinutes,
+                          needsWifi: needsWifi,
+                          studentDiscount: studentDiscount)
     }
 
     /// Saved nickname trimmed of spaces; empty string when none (Home shows "Hi, foodie!").

@@ -113,6 +113,8 @@ final class SpotSyncService {
     /// Offline safety net: if the store is empty, seed it from the bundled spots.json so the app still works,
     /// then report the original error so the UI can show "Offline — showing saved spots".
     private func fallBack(after error: Error, completion: @escaping (Result<Int, Error>) -> Void) {
+        // Log the real reason so it shows in the Xcode console / device log when debugging the "Offline" banner.
+        NSLog("KainSpotSync: falling back to saved spots because: %@", String(describing: error))
         let context = stack.newBackgroundContext()
         let bundle = self.bundle
         context.perform {
@@ -158,6 +160,17 @@ final class SpotSyncService {
             spot.isTrending = dto.isTrending
             spot.address = dto.address
             spot.blurb = dto.blurb
+            // Vacant-planner fields (defaults already applied by SpotDTO when the JSON lacks them).
+            spot.kind = dto.kind
+            spot.avgSpend = dto.avgSpend
+            spot.stayMinutes = dto.stayMinutes
+            spot.hasWifi = dto.hasWifi
+            spot.hasOutlets = dto.hasOutlets
+            spot.studentDiscount = dto.studentDiscount
+            spot.openLate = dto.openLate
+            spot.openHour = dto.openHour
+            spot.closeHour = dto.closeHour
+            spot.emoji = dto.emoji
             spot.syncedAt = syncedAt
         }
     }

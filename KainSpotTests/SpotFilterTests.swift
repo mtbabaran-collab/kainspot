@@ -59,5 +59,52 @@ final class SpotFilterTests: XCTestCase {
         XCTAssertEqual(filter.maxPrice, 0)
         XCTAssertFalse(filter.trendingOnly)
         XCTAssertEqual(filter.maxDistanceKm, 5, accuracy: 0.0001)
+        XCTAssertNil(filter.kind)
+        XCTAssertEqual(filter.maxSpend, 0)
+        XCTAssertEqual(filter.vacantMinutes, 60)
+        XCTAssertFalse(filter.needsWifi)
+        XCTAssertFalse(filter.studentDiscount)
+    }
+
+    /// Kind, peso budget, WiFi and student discount become Core Data conditions.
+    func testPredicateIncludesVacantPlannerFields() {
+        var filter = SpotFilter.default
+        filter.kind = "tambay"
+        filter.maxSpend = 250
+        filter.needsWifi = true
+        filter.studentDiscount = true
+        let format = filter.predicate().predicateFormat
+        XCTAssertTrue(format.contains("kind"))
+        XCTAssertTrue(format.contains("avgSpend"))
+        XCTAssertTrue(format.contains("hasWifi"))
+        XCTAssertTrue(format.contains("studentDiscount"))
+    }
+
+    /// Evaluating the new conditions against dictionaries: right kind, within budget, with WiFi passes.
+    func testPredicateEvaluatesKindBudgetAndWifi() {
+        var filter = SpotFilter.default
+        filter.kind = "tambay"
+        filter.maxSpend = 250
+        filter.needsWifi = true
+        let predicate = filter.predicate()
+
+        let goodCafe: [String: Any] = ["kind": "tambay", "avgSpend": 220, "hasWifi": true]
+        let pricey: [String: Any] = ["kind": "tambay", "avgSpend": 400, "hasWifi": true]
+        let noWifi: [String: Any] = ["kind": "tambay", "avgSpend": 100, "hasWifi": false]
+        let food: [String: Any] = ["kind": "kain", "avgSpend": 100, "hasWifi": true]
+
+        XCTAssertTrue(predicate.evaluate(with: goodCafe))
+        XCTAssertFalse(predicate.evaluate(with: pricey))
+        XCTAssertFalse(predicate.evaluate(with: noWifi))
+        XCTAssertFalse(predicate.evaluate(with: food))
+    }
+
+    /// The vacant check uses the planner: 1 km walk (13 min each way) + 30 min stay fits in 60, not in 50.
+    func testFitsVacant() {
+        var filter = SpotFilter.default
+        filter.vacantMinutes = 60
+        XCTAssertTrue(filter.fitsVacant(distanceKm: 1.0, stayMinutes: 30))
+        filter.vacantMinutes = 50
+        XCTAssertFalse(filter.fitsVacant(distanceKm: 1.0, stayMinutes: 30))
     }
 }

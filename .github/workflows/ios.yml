@@ -164,6 +164,8 @@ jobs:
 
       - name: Record demo walkthrough (UI test + video)
         continue-on-error: true
+        env:
+          TEST_RUNNER_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           set +e
           set -o pipefail
@@ -186,6 +188,7 @@ jobs:
           sleep 3
           wait "$REC_PID" || true
           ls -la demo.mp4 || true
+          xcrun simctl spawn "$PRO_UDID" log show --last 15m --style compact --predicate 'eventMessage CONTAINS "KainSpotSync" OR eventMessage CONTAINS "KainSpotAI"' > logs/app-device.log 2>&1 || true
           exit $STATUS
 
       - name: Home screenshot on iPhone SE

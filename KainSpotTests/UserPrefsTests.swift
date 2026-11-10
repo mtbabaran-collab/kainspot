@@ -69,4 +69,32 @@ final class UserPrefsTests: XCTestCase {
         defaults?.set(9, forKey: UserPrefs.Key.maxPrice)
         XCTAssertEqual(prefs.loadFilter().maxPrice, 3)
     }
+
+    /// The Vacant Planner choices survive a save/load round trip.
+    func testVacantPlannerFieldsRoundTrip() throws {
+        let prefs = try makePrefs()
+        let filter = SpotFilter(nickname: "Sis", maxPrice: 0, trendingOnly: false, maxDistanceKm: 5,
+                                kind: "galaw", maxSpend: 300, vacantMinutes: 90,
+                                needsWifi: true, studentDiscount: true)
+        prefs.save(filter)
+        XCTAssertEqual(prefs.loadFilter(), filter)
+
+        // Switching back to "all kinds" (nil) must clear the stored kind.
+        var allKinds = filter
+        allKinds.kind = nil
+        prefs.save(allKinds)
+        XCTAssertNil(prefs.loadFilter().kind)
+    }
+
+    /// Bad stored values fall back to safe defaults instead of breaking the planner.
+    func testBadVacantPlannerValuesFallBack() throws {
+        let prefs = try makePrefs()
+        defaults?.set("swimming", forKey: UserPrefs.Key.kind)
+        defaults?.set(-50, forKey: UserPrefs.Key.maxSpend)
+        defaults?.set(0, forKey: UserPrefs.Key.vacantMinutes)
+        let loaded = prefs.loadFilter()
+        XCTAssertNil(loaded.kind)
+        XCTAssertEqual(loaded.maxSpend, 0)
+        XCTAssertEqual(loaded.vacantMinutes, 60)
+    }
 }

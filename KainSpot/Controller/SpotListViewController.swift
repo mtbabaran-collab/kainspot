@@ -1,14 +1,17 @@
 //
 //  SpotListViewController.swift
 //  KainSpot — Controller layer
-//  Lists food spots from Core Data that match the user's filter, with pull-to-refresh syncing from the web.
+//  Lists spots from Core Data that match the user's filter, ranked by SmartRanker, with live search,
+//  pull-to-refresh syncing from the web, and the 🎰 roulette.
 //  Course week: Week 3 (UITableView + custom cells) and Week 5 (networking + Core Data persistence).
+//  Feature: Smart ranking, Vacant Planner leave-by line, UISearchController, Roulette, animated cells.
 //
 
 import UIKit
 import CoreData
 
-/// Table of spots filtered by price/trending (Core Data predicate) and distance (in memory).
+/// Table of spots: Core Data predicate (kind, price, budget, WiFi, discount, trending) → distance check in
+/// memory → SmartRanker ordering with whatever the student typed in the search bar.
 final class SpotListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -18,17 +21,18 @@ final class SpotListViewController: UIViewController {
     /// Set by PreferencesViewController in prepare(for:sender:).
     var filter: SpotFilter = .default
 
-    /// One visible row: the managed object plus its pre-computed distance from FEU Diliman.
-    private struct Row {
-        let spot: Spot
-        let distanceKm: Double
-    }
-
     private let context = CoreDataStack.shared.viewContext
     private let syncService = SpotSyncService()
     private let refreshControl = UIRefreshControl()
-    private var rows: [Row] = []
+    private let searchController = UISearchController(searchResultsController: nil)
+
+    /// Every spot that passed the filter (before search), kept so typing re-ranks without re-fetching.
+    private var filteredSpots: [Spot] = []
+    /// What the table shows, best first.
+    private var rows: [ScoredSpot] = []
     private var isSyncing = false
+    /// Spot ids that already played their entrance animation (animate on first appearance only).
+    private var animatedSpotIDs = Set<String>()
 
     /// Data is considered fresh for one hour; older than that we re-download on open.
     private let staleInterval: TimeInterval = 60 * 60
@@ -37,15 +41,17 @@ final class SpotListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Theme.background
         let name = filter.nickname.trimmingCharacters(in: .whitespacesAndNewlines)
-        title = name.isEmpty ? "Spots" : "Spots for \(name)"
+        title = name.isEmpty ? "Para sa'yo" : "Para sa'yo, \(name)"
 
         // Data source/delegate wired in code (not the storyboard) so the wiring is visible to readers.
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = Theme.background
-        tableView.rowHeight = 96
+        // Taller than the original 96 pt to fit the extra "Leave by" line.
+        tableView.rowHeight = 126
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        tableView.keyboardDismissMode = .onDrag
 
         refreshControl.tintColor = Theme.primary
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
@@ -55,6 +61,9 @@ final class SpotListViewController: UIViewController {
         bannerLabel.backgroundColor = Theme.primaryDark
         bannerLabel.textColor = .white
         emptyLabel.textColor = Theme.muted
+
+        configureSearch()
+        configureRouletteButton()
 
         // Show whatever is already saved immediately, then sync only if the data is missing or stale.
         reloadSpots()
@@ -80,9 +89,33 @@ final class SpotListViewController: UIViewController {
         return Date().timeIntervalSince(lastSync) > staleInterval
     }
 
+    // MARK: - Setup
+
+    /// Search bar in the navigation bar; typing re-ranks live (QueryParser + SmartRanker, fully offline).
+    private func configureSearch() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Try \"kape wifi\" or \"isaw under 100\""
+        searchController.searchBar.accessibilityIdentifier = "spotSearch"
+        searchController.searchBar.searchTextField.accessibilityIdentifier = "spotSearch"
+        searchController.searchBar.tintColor = Theme.primary
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+    }
+
+    /// "🎰" in the top-right opens the roulette with the current results.
+    private func configureRouletteButton() {
+        let roulette = UIBarButtonItem(title: "🎰", style: .plain, target: self, action: #selector(rouletteTapped))
+        roulette.accessibilityIdentifier = "rouletteButton"
+        roulette.accessibilityLabel = "Can't decide? Spin the roulette"
+        navigationItem.rightBarButtonItem = roulette
+    }
+
     // MARK: - Data
 
-    /// Two-step filter: Core Data handles price/trending + sorting; distance needs haversine maths so it runs in memory.
+    /// Step 1: Core Data does the cheap yes/no checks and the distance check runs in memory (haversine).
+    /// Step 2 (rank) orders what is left.
     private func reloadSpots() {
         let request = NSFetchRequest<Spot>(entityName: "Spot")
         request.predicate = filter.predicate()
@@ -99,19 +132,28 @@ final class SpotListViewController: UIViewController {
             fetched = []
         }
 
-        rows = fetched.compactMap { spot -> Row? in
-            let km = DistanceCalculator.kilometers(
-                from: DistanceCalculator.feuDiliman,
-                to: .init(latitude: spot.latitude, longitude: spot.longitude))
-            return filter.matches(distanceKm: km) ? Row(spot: spot, distanceKm: km) : nil
+        filteredSpots = fetched.filter { spot in
+            filter.matches(distanceKm: KainNavigator.distanceKm(to: spot))
         }
+        rank()
+    }
 
+    /// Ranks with the current search text (empty text = rank on the saved filter alone).
+    private func rank() {
+        let text = searchController.searchBar.text ?? ""
+        let query = QueryParser.parse(text)
+        rows = SmartRanker.rank(spots: filteredSpots,
+                                query: query,
+                                filter: filter,
+                                distanceFrom: DistanceCalculator.feuDiliman,
+                                now: Date())
         tableView.reloadData()
         updateEmptyState()
     }
 
     /// The empty message only makes sense once we are not in the middle of downloading.
     private func updateEmptyState() {
+        emptyLabel.text = "No spots match — try a longer vacant, a bigger budget or a wider distance."
         emptyLabel.isHidden = !rows.isEmpty || isSyncing
     }
 
@@ -153,15 +195,38 @@ final class SpotListViewController: UIViewController {
         }
     }
 
+    // MARK: - Roulette
+
+    /// Presents the roulette over the current results; "Let's go!" pushes the detail on our nav stack.
+    @objc private func rouletteTapped() {
+        Theme.hapticLight()
+        let candidates = rows.map { $0.spot }
+        let roulette = RouletteViewController(candidates: candidates)
+        let vacant = filter.vacantMinutes
+        roulette.onLetsGo = { [weak self] spot in
+            self?.openDetail(for: spot, vacantMinutes: vacant)
+        }
+        // Searching keeps the search controller "presenting"; present from it so UIKit doesn't complain.
+        let presenter: UIViewController = searchController.isActive ? searchController : self
+        presenter.present(roulette, animated: true)
+    }
+
+    /// Opens a spot from code (roulette) using the storyboard detail scene.
+    private func openDetail(for spot: Spot, vacantMinutes: Int) {
+        guard let detail = KainNavigator.makeDetail(for: spot, vacantMinutes: vacantMinutes) else { return }
+        navigationController?.pushViewController(detail, animated: true)
+    }
+
     // MARK: - Navigation
 
-    /// Hands the tapped Core Data object to the detail screen.
+    /// Hands the tapped Core Data object (and the vacant length) to the detail screen.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard segue.identifier == "showSpotDetail",
               let dest = segue.destination as? SpotDetailViewController,
               let spot = sender as? Spot else { return }
         dest.spot = spot
+        dest.vacantMinutes = filter.vacantMinutes
     }
 }
 
@@ -182,9 +247,9 @@ extension SpotListViewController: UITableViewDataSource {
         let row = rows[indexPath.row]
         let spotID = row.spot.id ?? ""
         let photo = spotID.isEmpty ? nil : PhotoStore.spotPhotos.load(named: "spot-\(spotID).jpg")
-        cell.configure(with: row.spot,
-                       distanceText: DistanceCalculator.formatted(row.distanceKm),
-                       photo: photo)
+        // Re-plan with the filter's vacant so the leave-by time matches what the student chose.
+        let plan = KainNavigator.plan(for: row.spot, vacantMinutes: filter.vacantMinutes)
+        cell.configure(with: row.spot, plan: plan, photo: photo)
         return cell
     }
 }
@@ -197,6 +262,25 @@ extension SpotListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard indexPath.row < rows.count else { return }
+        Theme.hapticLight()
         performSegue(withIdentifier: "showSpotDetail", sender: rows[indexPath.row].spot)
+    }
+
+    /// Cards fade and slide up the first time each spot appears (not on every scroll).
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard indexPath.row < rows.count else { return }
+        let id = rows[indexPath.row].spot.id ?? "\(indexPath.row)"
+        guard !animatedSpotIDs.contains(id) else { return }
+        animatedSpotIDs.insert(id)
+        Theme.animateIn(cell.contentView, delay: min(Double(indexPath.row) * 0.06, 0.4), offset: 24)
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension SpotListViewController: UISearchResultsUpdating {
+    /// Every keystroke re-parses the text and re-ranks the already-filtered spots (no network, instant).
+    func updateSearchResults(for searchController: UISearchController) {
+        rank()
     }
 }

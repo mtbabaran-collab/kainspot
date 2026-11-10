@@ -3,6 +3,7 @@
 //  KainSpot — Controller layer
 //  "My Food Gallery": a 3-column grid of the user's own food photos saved in the app's Documents folder.
 //  Course week: Week 7 (UICollectionView, multi-select PHPicker, reusable PhotoStore file persistence).
+//  Feature: UI upgrade — tiles fade in on first appearance, friendlier animated empty state.
 //
 
 import UIKit
@@ -22,6 +23,9 @@ final class GalleryViewController: UIViewController {
     /// Decoded thumbnails, so scrolling doesn't re-read full-size JPEGs from disk every time.
     private let thumbnailCache = NSCache<NSString, UIImage>()
 
+    /// File names that already played their entrance animation (first appearance only).
+    private var animatedFileNames = Set<String>()
+
     private let columns: CGFloat = 3
     private let spacing: CGFloat = 2
 
@@ -30,6 +34,9 @@ final class GalleryViewController: UIViewController {
         title = "My Food Gallery"
         view.backgroundColor = Theme.background
         emptyLabel.textColor = Theme.muted
+        emptyLabel.numberOfLines = 0
+        emptyLabel.textAlignment = .center
+        emptyLabel.attributedText = emptyStateText()
 
         // Data source/delegate set in code (not the storyboard) so the wiring is easy to follow.
         collectionView.dataSource = self
@@ -73,7 +80,35 @@ final class GalleryViewController: UIViewController {
     private func reloadPhotos() {
         fileNames = photoStore.allFileNames()
         collectionView.reloadData()
+        let wasHidden = emptyLabel.isHidden
         emptyLabel.isHidden = !fileNames.isEmpty
+        // Pop the empty state in (first load, or after deleting the last photo) so it feels alive.
+        if !emptyLabel.isHidden && (wasHidden || !hasShownEmptyState) {
+            hasShownEmptyState = true
+            Theme.animateIn(emptyLabel, delay: 0.1)
+        }
+    }
+
+    /// True once the empty-state entrance has played on this screen.
+    private var hasShownEmptyState = false
+
+    /// Big camera emoji, a bold headline and a muted hint, as one centred block.
+    private func emptyStateText() -> NSAttributedString {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        paragraph.lineSpacing = 6
+        let text = NSMutableAttributedString(
+            string: "📸\n",
+            attributes: [.font: UIFont.systemFont(ofSize: 64), .paragraphStyle: paragraph])
+        text.append(NSAttributedString(
+            string: "No food pics yet\n",
+            attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .bold),
+                         .foregroundColor: Theme.ink, .paragraphStyle: paragraph]))
+        text.append(NSAttributedString(
+            string: "Tap + to add your kain moments",
+            attributes: [.font: UIFont.systemFont(ofSize: 16),
+                         .foregroundColor: Theme.muted, .paragraphStyle: paragraph]))
+        return text
     }
 
     /// Reads and shrinks a photo off the main thread, then hands it back on main.
@@ -179,9 +214,27 @@ extension GalleryViewController: UICollectionViewDataSource {
 
 extension GalleryViewController: UICollectionViewDelegate {
 
+    /// Tiles fade and scale in the first time each photo shows up.
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        guard indexPath.item < fileNames.count else { return }
+        let name = fileNames[indexPath.item]
+        guard !animatedFileNames.contains(name) else { return }
+        animatedFileNames.insert(name)
+        cell.contentView.alpha = 0
+        cell.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        UIView.animate(withDuration: 0.4, delay: min(Double(indexPath.item) * 0.03, 0.3),
+                       usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5,
+                       options: [.allowUserInteraction]) {
+            cell.contentView.alpha = 1
+            cell.contentView.transform = .identity
+        }
+    }
+
     /// Tapping a photo offers to delete it.
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        Theme.hapticLight()
         confirmDelete(at: indexPath)
     }
 }

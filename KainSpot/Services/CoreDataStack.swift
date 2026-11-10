@@ -43,10 +43,40 @@ final class CoreDataStack {
             description.url = URL(fileURLWithPath: "/dev/null")
         }
 
+        // The model gained attributes (kind, avgSpend, hours, amenities...). Lightweight migration lets an
+        // existing on-device store open with the new model instead of failing; the new columns get their defaults.
+        for description in container.persistentStoreDescriptions {
+            description.shouldMigrateStoreAutomatically = true
+            description.shouldInferMappingModelAutomatically = true
+        }
+
         container.loadPersistentStores { description, error in
             // A broken store should not crash a student demo; log it and keep the app usable.
             if let error = error {
                 print("CoreDataStack: failed to load store \(description): \(error)")
+            }
+        }
+
+        // The model was edited in place (not versioned), so a store written by the OLD app version has no
+        // source model to infer a lightweight migration from and fails to open. The Spot table is only a
+        // cache of spots.json (user photos are separate files), so the safe fix is: delete that old store,
+        // open a fresh one, and clear lastSync so the app re-downloads / re-seeds the spots.
+        // loadPersistentStores is synchronous here (shouldAddStoreAsynchronously defaults to false).
+        if !inMemory,
+           container.persistentStoreCoordinator.persistentStores.isEmpty,
+           let storeURL = container.persistentStoreDescriptions.first?.url {
+            do {
+                try container.persistentStoreCoordinator.destroyPersistentStore(at: storeURL,
+                                                                                ofType: NSSQLiteStoreType,
+                                                                                options: nil)
+                UserPrefs.shared.lastSync = nil
+            } catch {
+                print("CoreDataStack: could not remove incompatible store: \(error)")
+            }
+            container.loadPersistentStores { description, error in
+                if let error = error {
+                    print("CoreDataStack: store still failed after reset \(description): \(error)")
+                }
             }
         }
 
