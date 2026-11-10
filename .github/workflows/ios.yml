@@ -238,10 +238,8 @@ jobs:
           done
           open -a "$XCODE_APP" KainSpot/Services/VacantPlanner.swift
           sleep 8
-          # If the components window is still there, hide Xcode so the desktop looks clean.
-          STILL=$(osascript -e 'tell application "System Events" to tell (first process whose bundle identifier is "com.apple.dt.Xcode") to get name of every button of every window' 2>>$LOG)
-          echo "buttons now: $STILL" >> $LOG
-          case "$STILL" in *"Download & Install"*) osascript -e 'tell application "System Events" to set visible of (first process whose bundle identifier is "com.apple.dt.Xcode") to false' >> $LOG 2>&1; echo "xcode hidden" >> $LOG;; esac
+          # Xcode's components window can't be dismissed on CI, so quit Xcode for a clean desktop.
+          pkill -x Xcode >> $LOG 2>&1; sleep 3; echo "xcode hidden" >> $LOG
           open -a Simulator --args -CurrentDeviceUDID "$PRO_UDID"
           sleep 10
           # The Simulator app can reset location: set FEU Diliman again.
@@ -249,16 +247,17 @@ jobs:
           # Arrange: Xcode on the left, Simulator on the right (best effort; needs accessibility).
           read SW SH < <(osascript -e 'tell application "Finder" to get bounds of window of desktop' 2>>$LOG | awk -F', ' '{print $3, $4}')
           echo "screen: $SW x $SH" >> $LOG
-          SPLIT=$(( ${SW:-1024} * 62 / 100 ))
-          osascript -e "tell application \"Xcode\" to set bounds of front window to {0, 25, $SPLIT, ${SH:-768}}" >> $LOG 2>&1
-          osascript -e "tell application \"System Events\" to tell process \"Simulator\" to set position of front window to {$SPLIT, 25}" >> $LOG 2>&1
+          # Center the Simulator window on the desktop.
+          SIMW=$(osascript -e 'tell application "System Events" to tell process "Simulator" to get item 1 of (get size of front window)' 2>>$LOG)
+          XPOS=$(( (${SW:-1920} - ${SIMW:-650}) / 2 ))
+          osascript -e "tell application \"System Events\" to tell process \"Simulator\" to set position of front window to {$XPOS, 40}" >> $LOG 2>&1
           osascript -e 'tell application "Simulator" to activate' >> $LOG 2>&1
           sleep 3
           screencapture -x mac/mac-desktop-start.png
           # Whole-screen video of the Mac while the app runs (fixed length), plus stills every 8 s.
-          screencapture -x -v -V 330 mac/mac-demo.mov > logs/mac-record.log 2>&1 &
+          screencapture -x -v -V 215 mac/mac-demo.mov > logs/mac-record.log 2>&1 &
           REC_PID=$!
-          ( for i in $(seq -w 1 40); do sleep 8; screencapture -x "mac/mac-shot-$i.png"; done ) &
+          ( for i in $(seq -w 1 26); do sleep 8; screencapture -x "mac/mac-shot-$i.png"; done ) &
           SHOTS_PID=$!
           sleep 3
           xcodebuild test-without-building \
