@@ -191,6 +191,45 @@ jobs:
           xcrun simctl spawn "$PRO_UDID" log show --last 15m --style compact --predicate 'eventMessage CONTAINS "KainSpotSync" OR eventMessage CONTAINS "KainSpotAI"' > logs/app-device.log 2>&1 || true
           exit $STATUS
 
+      - name: Record Mac desktop demo (Xcode + Simulator window)
+        continue-on-error: true
+        env:
+          TEST_RUNNER_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          set +e
+          mkdir -p mac
+          # Show the real macOS apps: Xcode with the project, and the Simulator window for the Pro device.
+          open KainSpot.xcodeproj
+          sleep 25
+          open -a Simulator --args -CurrentDeviceUDID "$PRO_UDID"
+          sleep 10
+          osascript -e 'tell application "Simulator" to activate' || true
+          sleep 3
+          screencapture -x mac/mac-desktop-start.png
+          # Whole-screen video of the Mac while the app runs (fixed length), plus stills every 8 s.
+          screencapture -x -v -V 175 mac/mac-demo.mov > logs/mac-record.log 2>&1 &
+          REC_PID=$!
+          ( for i in $(seq -w 1 22); do sleep 8; screencapture -x "mac/mac-shot-$i.png"; done ) &
+          SHOTS_PID=$!
+          sleep 3
+          xcodebuild test-without-building \
+            -project KainSpot.xcodeproj \
+            -scheme KainSpot \
+            -destination "id=$PRO_UDID" \
+            -derivedDataPath "$DERIVED_DATA" \
+            -only-testing:KainSpotUITests/KainSpotDemoUITests/testFullDemoWalkthrough \
+            -parallel-testing-enabled NO \
+            -resultBundlePath results/MacDesktopDemo.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            > logs/ui-mac-demo.log 2>&1
+          wait "$SHOTS_PID" || true
+          wait "$REC_PID" || true
+          # Final still: Xcode in front with the project open.
+          osascript -e 'tell application "Xcode" to activate' || true
+          sleep 4
+          screencapture -x mac/mac-xcode-project.png
+          ls -la mac
+
       - name: Home screenshot on iPhone SE
         continue-on-error: true
         run: |
@@ -268,6 +307,7 @@ jobs:
           if-no-files-found: warn
           path: |
             demo.mp4
+            mac/**
             out/**
             xcresults.zip
             logs/**
