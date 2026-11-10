@@ -217,8 +217,31 @@ jobs:
           # Show the real macOS apps: Xcode with the project and a code file, plus the Simulator window.
           open -a "$XCODE_APP" KainSpot.xcodeproj
           sleep 30
+          # Close Xcode's "Select the components…" first-launch window if it shows up.
+          for attempt in 1 2 3 4; do
+            osascript >> $LOG 2>&1 <<'OSA'
+          tell application "System Events"
+            tell (first process whose bundle identifier is "com.apple.dt.Xcode")
+              set frontmost to true
+              repeat with w in windows
+                set names to name of every button of w
+                log ("window: " & (name of w as text) & " buttons: " & (names as text))
+                repeat with b in {"Skip", "Not Now", "Continue", "Close", "Later", "Cancel"}
+                  if names contains (b as text) then click button (b as text) of w
+                end repeat
+              end repeat
+            end tell
+            key code 53
+          end tell
+          OSA
+            sleep 3
+          done
           open -a "$XCODE_APP" KainSpot/Services/VacantPlanner.swift
           sleep 8
+          # If the components window is still there, hide Xcode so the desktop looks clean.
+          STILL=$(osascript -e 'tell application "System Events" to tell (first process whose bundle identifier is "com.apple.dt.Xcode") to get name of every button of every window' 2>>$LOG)
+          echo "buttons now: $STILL" >> $LOG
+          case "$STILL" in *"Download & Install"*) osascript -e 'tell application "System Events" to set visible of (first process whose bundle identifier is "com.apple.dt.Xcode") to false' >> $LOG 2>&1; echo "xcode hidden" >> $LOG;; esac
           open -a Simulator --args -CurrentDeviceUDID "$PRO_UDID"
           sleep 10
           # The Simulator app can reset location: set FEU Diliman again.
@@ -250,10 +273,12 @@ jobs:
             > logs/ui-mac-demo.log 2>&1
           wait "$SHOTS_PID" || true
           wait "$REC_PID" || true
-          # Final still: Xcode in front with the project open.
-          osascript -e 'tell application "Xcode" to activate' || true
-          sleep 4
-          screencapture -x mac/mac-xcode-project.png
+          # Final still: Xcode in front with the project open (only if its components window is gone).
+          if ! grep -q "xcode hidden" $LOG; then
+            osascript -e 'tell application "System Events" to set frontmost of (first process whose bundle identifier is "com.apple.dt.Xcode") to true' >> $LOG 2>&1
+            sleep 4
+            screencapture -x mac/mac-xcode-project.png
+          fi
           ls -la mac
 
       - name: Home screenshot on iPhone SE
