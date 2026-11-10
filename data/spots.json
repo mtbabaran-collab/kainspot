@@ -1,0 +1,122 @@
+[
+  {
+    "id": "mang-larrys-isawan",
+    "name": "Mang Larry's Isawan",
+    "category": "Street Food",
+    "price_level": 1,
+    "rating": 4.6,
+    "latitude": 14.6566,
+    "longitude": 121.0690,
+    "is_trending": true,
+    "address": "Beside Kalayaan Residence Hall, UP Diliman, QC",
+    "blurb": "Legendary isaw and BBQ grilled to order — the after-class tambayan of Diliman students."
+  },
+  {
+    "id": "rodics-diner",
+    "name": "Rodic's Diner",
+    "category": "Diner",
+    "price_level": 1,
+    "rating": 4.4,
+    "latitude": 14.6559,
+    "longitude": 121.0647,
+    "is_trending": true,
+    "address": "UP Shopping Center, UP Diliman, QC",
+    "blurb": "Old-school diner famous for its tapsilog — cheap, filling and perfect before a long lab."
+  },
+  {
+    "id": "pino-restaurant",
+    "name": "Pino Restaurant",
+    "category": "Filipino",
+    "price_level": 2,
+    "rating": 4.5,
+    "latitude": 14.6441,
+    "longitude": 121.0603,
+    "is_trending": false,
+    "address": "Maginhawa St area, Teachers Village, QC",
+    "blurb": "Creative takes on Filipino comfort food — a good pick for barkada celebrations after finals."
+  },
+  {
+    "id": "cafe-inggo-1587",
+    "name": "Café Inggo 1587",
+    "category": "Café",
+    "price_level": 2,
+    "rating": 4.3,
+    "latitude": 14.6462,
+    "longitude": 121.0619,
+    "is_trending": true,
+    "address": "Maginhawa St, Teachers Village, QC",
+    "blurb": "Cozy café with local coffee and pastries — bring your laptop and grind out that capstone."
+  },
+  {
+    "id": "common-folk-coffee-bar",
+    "name": "Common Folk Coffee Bar",
+    "category": "Café",
+    "price_level": 2,
+    "rating": 4.5,
+    "latitude": 14.6362,
+    "longitude": 121.0338,
+    "is_trending": false,
+    "address": "Scout Rallos St, Quezon City",
+    "blurb": "Minimalist coffee bar with solid espresso and quiet corners for group study sessions."
+  },
+  {
+    "id": "olivias-cafe",
+    "name": "Olivia's Café",
+    "category": "Café",
+    "price_level": 2,
+    "rating": 4.4,
+    "latitude": 14.6447,
+    "longitude": 121.0546,
+    "is_trending": false,
+    "address": "Kalayaan Ave, Diliman, QC",
+    "blurb": "Homey café with pasta, rice meals and cakes — chill spot for catching up with friends."
+  },
+  {
+    "id": "up-town-center-food-strip",
+    "name": "UP Town Center food strip",
+    "category": "Food Hall",
+    "price_level": 2,
+    "rating": 4.5,
+    "latitude": 14.6508,
+    "longitude": 121.0754,
+    "is_trending": true,
+    "address": "Katipunan Ave, Diliman, QC",
+    "blurb": "Rows of restaurants in one stop — milk tea, ramen, chicken and more when the group can't decide."
+  },
+  {
+    "id": "vertis-north-food-court",
+    "name": "Ayala Malls Vertis North food court",
+    "category": "Food Hall",
+    "price_level": 2,
+    "rating": 4.2,
+    "latitude": 14.6514,
+    "longitude": 121.0327,
+    "is_trending": false,
+    "address": "North Ave cor. Mindanao Ave, QC",
+    "blurb": "Air-conditioned food court with lots of choices — easy meet-up spot by the MRT North Ave station."
+  },
+  {
+    "id": "cubao-expo",
+    "name": "Cubao Expo",
+    "category": "Hangout",
+    "price_level": 2,
+    "rating": 4.4,
+    "latitude": 14.6151,
+    "longitude": 121.0547,
+    "is_trending": true,
+    "address": "General Romulo Ave, Cubao, QC",
+    "blurb": "Artsy courtyard of indie cafés, bars and thrift shops — the weekend hangout after a long sem."
+  },
+  {
+    "id": "lemuria",
+    "name": "Lemuria",
+    "category": "Fine Dining",
+    "price_level": 3,
+    "rating": 4.7,
+    "latitude": 14.6178,
+    "longitude": 121.0372,
+    "is_trending": false,
+    "address": "Near Diliman, Quezon City",
+    "blurb": "Elegant garden restaurant for special occasions — save up for grad dinner with the family."
+  }
+]
