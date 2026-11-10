@@ -198,12 +198,38 @@ jobs:
         run: |
           set +e
           mkdir -p mac
-          # Show the real macOS apps: Xcode with the project, and the Simulator window for the Pro device.
-          open KainSpot.xcodeproj
-          sleep 25
+          LOG=logs/mac-setup.log
+          # Use the SAME Xcode that built the app (not the newest one, which shows a first-launch screen).
+          XCODE_APP="$(xcode-select -p | sed 's|/Contents/Developer$||')"
+          echo "Xcode app: $XCODE_APP" >> $LOG
+          sudo xcodebuild -runFirstLaunch >> $LOG 2>&1
+          defaults write com.apple.dt.Xcode DVTSkipFirstLaunchExperience -bool YES
+          defaults write com.apple.dt.Xcode IDEDidShowWelcomeWindow -bool YES
+          defaults write com.apple.dt.Xcode XcodeWelcomeWindowShowOnLaunch -bool NO
+          # Try to make the Mac screen bigger (best effort).
+          brew install displayplacer >> $LOG 2>&1
+          displayplacer list >> $LOG 2>&1
+          DISP_ID=$(displayplacer list 2>/dev/null | awk '/Persistent screen id:/{print $4; exit}')
+          for RES in 1920x1080 1680x1050 1600x900 1440x900 1280x800; do
+            displayplacer "id:$DISP_ID res:$RES scaling:off origin:(0,0) degree:0" >> $LOG 2>&1 && { echo "resolution set: $RES" >> $LOG; break; }
+          done
+          system_profiler SPDisplaysDataType | grep -i resolution >> $LOG 2>&1
+          # Show the real macOS apps: Xcode with the project and a code file, plus the Simulator window.
+          open -a "$XCODE_APP" KainSpot.xcodeproj
+          sleep 30
+          open -a "$XCODE_APP" KainSpot/Services/VacantPlanner.swift
+          sleep 8
           open -a Simulator --args -CurrentDeviceUDID "$PRO_UDID"
           sleep 10
-          osascript -e 'tell application "Simulator" to activate' || true
+          # The Simulator app can reset location: set FEU Diliman again.
+          xcrun simctl location "$PRO_UDID" set 14.68444,121.06333 >> $LOG 2>&1
+          # Arrange: Xcode on the left, Simulator on the right (best effort; needs accessibility).
+          read SW SH < <(osascript -e 'tell application "Finder" to get bounds of window of desktop' 2>>$LOG | awk -F', ' '{print $3, $4}')
+          echo "screen: $SW x $SH" >> $LOG
+          SPLIT=$(( ${SW:-1024} * 62 / 100 ))
+          osascript -e "tell application \"Xcode\" to set bounds of front window to {0, 25, $SPLIT, ${SH:-768}}" >> $LOG 2>&1
+          osascript -e "tell application \"System Events\" to tell process \"Simulator\" to set position of front window to {$SPLIT, 25}" >> $LOG 2>&1
+          osascript -e 'tell application "Simulator" to activate' >> $LOG 2>&1
           sleep 3
           screencapture -x mac/mac-desktop-start.png
           # Whole-screen video of the Mac while the app runs (fixed length), plus stills every 8 s.
