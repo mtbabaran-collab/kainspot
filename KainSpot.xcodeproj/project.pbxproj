@@ -1,0 +1,760 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09979EDB70B1A46A44692334 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF405402A45F70684593D27D /* PreferencesViewController.swift */; };
+		0FCC957C583434E817A247CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F047B8D7D69497DFFA8540 /* Theme.swift */; };
+		15CBEBEC7C1F10FFC7ECD4ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C1A8F49C9C77B6FD090FB6 /* SceneDelegate.swift */; };
+		179BD3AE6BF2D4C0BF00A1E9 /* SpotFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB113C53B4A10E3166492BF4 /* SpotFilter.swift */; };
+		34A10B0ADBE2129C03F6D0FE /* TravelEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBC8A6C9F5A0A39D8F9B80E /* TravelEstimator.swift */; };
+		355552764E778977AA4C757D /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62235088BE739ECE401503D /* SpotListViewController.swift */; };
+		3D4BC342EC8F8D9370F326D5 /* UserPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17323A084FC917DFC27D58B /* UserPrefs.swift */; };
+		483BFAC35BF6339F833EB3D4 /* SpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5D4BC5C1CEF0C32B0A76FD /* SpotCell.swift */; };
+		4944CA4814AC6D77890F885D /* VacantPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D7E57D17EA7D9998158BE2 /* VacantPlanner.swift */; };
+		4DCA4D2171B828ADDFF2F7C6 /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2B97AAE4CF8AB5AE01C1FC /* PhotoStore.swift */; };
+		4F61FBE995CF2813C2EFFEC5 /* VacantPlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333BC67CE29DF4C938B1BEC9 /* VacantPlannerTests.swift */; };
+		53982086EDDB6B5F7AEEAA83 /* GeminiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E76439666F4DDDF5DD7A4 /* GeminiService.swift */; };
+		5409FFA0A6F96EECB06A43B9 /* QueryParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61029C5D0DF5E1256C56BDD9 /* QueryParserTests.swift */; };
+		57D2470642C4F36DFBD5FF73 /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D080A060BDC8131E5B57277B /* GalleryCell.swift */; };
+		5B8ABA416503752EA42547C3 /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55378F6CA6BD0B526049F1FE /* SpotDetailViewController.swift */; };
+		63EEEB4BAEB00EA43233BFDA /* DistanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF5453C8A60A9A8B730F0F3 /* DistanceCalculator.swift */; };
+		6BF306D1FA7E2870767F4856 /* PhotoStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DE2C871E69155386DDE26F /* PhotoStoreTests.swift */; };
+		6C62266D2F169084F38CA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F4814867C9A92C2DC8DA7F /* AppDelegate.swift */; };
+		6C7C3239ACFDB5D44B6649BE /* KainSpot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30E383E9E8E4E94424089620 /* KainSpot.xcdatamodeld */; };
+		730E0C5E3E4D41FF589D1A42 /* SpotKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F1D4F96A9B300DC49A325 /* SpotKind.swift */; };
+		76A9FC2DD6928993065439D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E45301230A5F0DA06B2B89CE /* Assets.xcassets */; };
+		7C05DA82FB512F1C45C166D6 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54928D463107222E33ADBD5 /* GalleryViewController.swift */; };
+		889F8C0B3B4295E0387ED23C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF82B98501EC189E47A4714 /* HomeViewController.swift */; };
+		93D77AF9162060A12A0B6DE8 /* TravelEstimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6209F2085A7526358541EA /* TravelEstimatorTests.swift */; };
+		9B8AF125D26BDEF7B0D190BC /* SmartRanker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BAB6640E4E772A47C41234 /* SmartRanker.swift */; };
+		9F31C8B6762D2D6DF59CC462 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37987D5EA1C402175BF61125 /* LocationService.swift */; };
+		A2B06B8CF4B0E248B2392647 /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA90CABA5AED8FCC4D96FE /* AskViewController.swift */; };
+		A31793B02D8E490060C23974 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471FED72460743B558C3D005 /* CoreDataStack.swift */; };
+		A8424C906551024B81DACE36 /* spots.json in Resources */ = {isa = PBXBuildFile; fileRef = 53069CF32666458452E05196 /* spots.json */; };
+		AFE90ECE844CC097E398DE45 /* SmartRankerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2805E1B2947D43E94257E18B /* SmartRankerTests.swift */; };
+		C313447E9EAA10C8B3F4215D /* QueryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4F79B2753E29B5C9A1468B /* QueryParser.swift */; };
+		C44DE987D98A9225E1F54E96 /* SpotSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7306D2E9BD04F25B494207A3 /* SpotSyncService.swift */; };
+		C696DCF725FE4544EF7DC50A /* SpotDTODecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113310744B6B841C4AC162F5 /* SpotDTODecodingTests.swift */; };
+		C7917ABAB2689810D2461F1F /* KainNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A6FDC56D257E53255D8BD /* KainNavigator.swift */; };
+		CBFE01CD6DFA74E7876E3829 /* SpotDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A112D5869EDA2A9FE9CA0ED /* SpotDTO.swift */; };
+		CE31BBACE0C0A53DC27790F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32391C51F52BCDCB54C501EA /* Main.storyboard */; };
+		D73199BB6D5C2C58E59FFBD8 /* UserPrefsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ECBD722B1BBB4C1C9F75B7 /* UserPrefsTests.swift */; };
+		DC78CEDF4212C6F6EDCAE89C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC057D01DF19DF64074C198E /* LaunchScreen.storyboard */; };
+		DEAA2F589E902798B48C182F /* DistanceCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB18B7422B2FBCDBBFE619DA /* DistanceCalculatorTests.swift */; };
+		DF67DF85B0F4A128413339FF /* RouletteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E683AF9229CB81912AA7521 /* RouletteViewController.swift */; };
+		E71DE616F286B906BC912A10 /* KainSpotDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F932010D1E65F79E42766A /* KainSpotDemoUITests.swift */; };
+		E8D1F16B8DDF0AFE7B02EE82 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E971B062EA4ED05F7FB9324 /* KeychainStore.swift */; };
+		EBCE2D73B7EC562C8253F3A2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A58196969585BF5EC7D647 /* SettingsViewController.swift */; };
+		EBFF62DD62FE803255701C9D /* SpotFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62944E5764DE5F8FE45CBEB9 /* SpotFilterTests.swift */; };
+		F1487C4D26B3605057102728 /* GeminiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBDD19E46B9744CFCD405FD /* GeminiServiceTests.swift */; };
+		F82E79C436D2C69E770CA9A9 /* PriceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC566B5E8C9FC7AB835FFA /* PriceLevel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6B2284C8F1451EB486175573 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A124C23EE57C153DE1CF0000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25EAF73A41E57D87250D6E0C;
+			remoteInfo = KainSpot;
+		};
+		76F2DCDD760BE2AD75E34390 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A124C23EE57C153DE1CF0000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25EAF73A41E57D87250D6E0C;
+			remoteInfo = KainSpot;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		05ECBD722B1BBB4C1C9F75B7 /* UserPrefsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPrefsTests.swift; sourceTree = "<group>"; };
+		0D4F79B2753E29B5C9A1468B /* QueryParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParser.swift; sourceTree = "<group>"; };
+		0E971B062EA4ED05F7FB9324 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		113310744B6B841C4AC162F5 /* SpotDTODecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDTODecodingTests.swift; sourceTree = "<group>"; };
+		13D7E57D17EA7D9998158BE2 /* VacantPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacantPlanner.swift; sourceTree = "<group>"; };
+		1B6209F2085A7526358541EA /* TravelEstimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelEstimatorTests.swift; sourceTree = "<group>"; };
+		21C2F8B0B44466425B207DDF /* KainSpot.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = KainSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2805E1B2947D43E94257E18B /* SmartRankerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartRankerTests.swift; sourceTree = "<group>"; };
+		2E683AF9229CB81912AA7521 /* RouletteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteViewController.swift; sourceTree = "<group>"; };
+		2EF5453C8A60A9A8B730F0F3 /* DistanceCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceCalculator.swift; sourceTree = "<group>"; };
+		32391C51F52BCDCB54C501EA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		333BC67CE29DF4C938B1BEC9 /* VacantPlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacantPlannerTests.swift; sourceTree = "<group>"; };
+		35BAB6640E4E772A47C41234 /* SmartRanker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartRanker.swift; sourceTree = "<group>"; };
+		37987D5EA1C402175BF61125 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		39F4814867C9A92C2DC8DA7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3FF82B98501EC189E47A4714 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		471FED72460743B558C3D005 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		4A112D5869EDA2A9FE9CA0ED /* SpotDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDTO.swift; sourceTree = "<group>"; };
+		505AF5125E2487133C07CA60 /* KainSpotTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KainSpotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		53069CF32666458452E05196 /* spots.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = spots.json; sourceTree = "<group>"; };
+		53BA067EDC80695FF21C17C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		55378F6CA6BD0B526049F1FE /* SpotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewController.swift; sourceTree = "<group>"; };
+		5F5D4BC5C1CEF0C32B0A76FD /* SpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCell.swift; sourceTree = "<group>"; };
+		61029C5D0DF5E1256C56BDD9 /* QueryParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParserTests.swift; sourceTree = "<group>"; };
+		62944E5764DE5F8FE45CBEB9 /* SpotFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTests.swift; sourceTree = "<group>"; };
+		72FC566B5E8C9FC7AB835FFA /* PriceLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLevel.swift; sourceTree = "<group>"; };
+		7306D2E9BD04F25B494207A3 /* SpotSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSyncService.swift; sourceTree = "<group>"; };
+		81EA90CABA5AED8FCC4D96FE /* AskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskViewController.swift; sourceTree = "<group>"; };
+		95A58196969585BF5EC7D647 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A1DE2C871E69155386DDE26F /* PhotoStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStoreTests.swift; sourceTree = "<group>"; };
+		AB113C53B4A10E3166492BF4 /* SpotFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilter.swift; sourceTree = "<group>"; };
+		B1F047B8D7D69497DFFA8540 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		B54928D463107222E33ADBD5 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		C15F1D4F96A9B300DC49A325 /* SpotKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotKind.swift; sourceTree = "<group>"; };
+		C1C1A8F49C9C77B6FD090FB6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C3F932010D1E65F79E42766A /* KainSpotDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KainSpotDemoUITests.swift; sourceTree = "<group>"; };
+		CB18B7422B2FBCDBBFE619DA /* DistanceCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceCalculatorTests.swift; sourceTree = "<group>"; };
+		CC057D01DF19DF64074C198E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CC0A6FDC56D257E53255D8BD /* KainNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KainNavigator.swift; sourceTree = "<group>"; };
+		CE2B97AAE4CF8AB5AE01C1FC /* PhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStore.swift; sourceTree = "<group>"; };
+		CF405402A45F70684593D27D /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		D080A060BDC8131E5B57277B /* GalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
+		D1F33ECB0A54E6F79935BED8 /* KainSpotUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KainSpotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCBC8A6C9F5A0A39D8F9B80E /* TravelEstimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelEstimator.swift; sourceTree = "<group>"; };
+		DFBDD19E46B9744CFCD405FD /* GeminiServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiServiceTests.swift; sourceTree = "<group>"; };
+		E022AED4CC29A7D30F329FD5 /* KainSpot.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KainSpot.xcdatamodel; sourceTree = "<group>"; };
+		E17323A084FC917DFC27D58B /* UserPrefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPrefs.swift; sourceTree = "<group>"; };
+		E45301230A5F0DA06B2B89CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F23E76439666F4DDDF5DD7A4 /* GeminiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiService.swift; sourceTree = "<group>"; };
+		F62235088BE739ECE401503D /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		54E1D3DD1BF22559DAC3108E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				81EA90CABA5AED8FCC4D96FE /* AskViewController.swift */,
+				B54928D463107222E33ADBD5 /* GalleryViewController.swift */,
+				3FF82B98501EC189E47A4714 /* HomeViewController.swift */,
+				CC0A6FDC56D257E53255D8BD /* KainNavigator.swift */,
+				CF405402A45F70684593D27D /* PreferencesViewController.swift */,
+				2E683AF9229CB81912AA7521 /* RouletteViewController.swift */,
+				95A58196969585BF5EC7D647 /* SettingsViewController.swift */,
+				55378F6CA6BD0B526049F1FE /* SpotDetailViewController.swift */,
+				F62235088BE739ECE401503D /* SpotListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65D45A04CC12277EA9A6465E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				471FED72460743B558C3D005 /* CoreDataStack.swift */,
+				2EF5453C8A60A9A8B730F0F3 /* DistanceCalculator.swift */,
+				F23E76439666F4DDDF5DD7A4 /* GeminiService.swift */,
+				0E971B062EA4ED05F7FB9324 /* KeychainStore.swift */,
+				37987D5EA1C402175BF61125 /* LocationService.swift */,
+				CE2B97AAE4CF8AB5AE01C1FC /* PhotoStore.swift */,
+				0D4F79B2753E29B5C9A1468B /* QueryParser.swift */,
+				35BAB6640E4E772A47C41234 /* SmartRanker.swift */,
+				7306D2E9BD04F25B494207A3 /* SpotSyncService.swift */,
+				DCBC8A6C9F5A0A39D8F9B80E /* TravelEstimator.swift */,
+				E17323A084FC917DFC27D58B /* UserPrefs.swift */,
+				13D7E57D17EA7D9998158BE2 /* VacantPlanner.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6E9750738BCF65B8851821E6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				72FC566B5E8C9FC7AB835FFA /* PriceLevel.swift */,
+				4A112D5869EDA2A9FE9CA0ED /* SpotDTO.swift */,
+				AB113C53B4A10E3166492BF4 /* SpotFilter.swift */,
+				C15F1D4F96A9B300DC49A325 /* SpotKind.swift */,
+				30E383E9E8E4E94424089620 /* KainSpot.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6FE64E04724A2AF985467789 /* KainSpotTests */ = {
+			isa = PBXGroup;
+			children = (
+				CB18B7422B2FBCDBBFE619DA /* DistanceCalculatorTests.swift */,
+				DFBDD19E46B9744CFCD405FD /* GeminiServiceTests.swift */,
+				A1DE2C871E69155386DDE26F /* PhotoStoreTests.swift */,
+				61029C5D0DF5E1256C56BDD9 /* QueryParserTests.swift */,
+				2805E1B2947D43E94257E18B /* SmartRankerTests.swift */,
+				113310744B6B841C4AC162F5 /* SpotDTODecodingTests.swift */,
+				62944E5764DE5F8FE45CBEB9 /* SpotFilterTests.swift */,
+				1B6209F2085A7526358541EA /* TravelEstimatorTests.swift */,
+				05ECBD722B1BBB4C1C9F75B7 /* UserPrefsTests.swift */,
+				333BC67CE29DF4C938B1BEC9 /* VacantPlannerTests.swift */,
+			);
+			path = KainSpotTests;
+			sourceTree = "<group>";
+		};
+		729BC1C4A6E572027CF22CEB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E45301230A5F0DA06B2B89CE /* Assets.xcassets */,
+				53069CF32666458452E05196 /* spots.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8752B8D06A423A32E2E578EC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				39F4814867C9A92C2DC8DA7F /* AppDelegate.swift */,
+				53BA067EDC80695FF21C17C4 /* Info.plist */,
+				C1C1A8F49C9C77B6FD090FB6 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8A7C407DE45F861B11A1DD9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21C2F8B0B44466425B207DDF /* KainSpot.app */,
+				505AF5125E2487133C07CA60 /* KainSpotTests.xctest */,
+				D1F33ECB0A54E6F79935BED8 /* KainSpotUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8AF6A5A6643F72C1AA6EBF67 /* KainSpot */ = {
+			isa = PBXGroup;
+			children = (
+				8752B8D06A423A32E2E578EC /* App */,
+				54E1D3DD1BF22559DAC3108E /* Controller */,
+				6E9750738BCF65B8851821E6 /* Model */,
+				729BC1C4A6E572027CF22CEB /* Resources */,
+				65D45A04CC12277EA9A6465E /* Services */,
+				B73F879DA41E1045C95C041F /* View */,
+			);
+			path = KainSpot;
+			sourceTree = "<group>";
+		};
+		9F3E271CE7018ECDDBE73FC5 /* KainSpotUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C3F932010D1E65F79E42766A /* KainSpotDemoUITests.swift */,
+			);
+			path = KainSpotUITests;
+			sourceTree = "<group>";
+		};
+		AD0BE75272915D695EC59AEB = {
+			isa = PBXGroup;
+			children = (
+				8AF6A5A6643F72C1AA6EBF67 /* KainSpot */,
+				6FE64E04724A2AF985467789 /* KainSpotTests */,
+				9F3E271CE7018ECDDBE73FC5 /* KainSpotUITests */,
+				8A7C407DE45F861B11A1DD9E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B73F879DA41E1045C95C041F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D080A060BDC8131E5B57277B /* GalleryCell.swift */,
+				CC057D01DF19DF64074C198E /* LaunchScreen.storyboard */,
+				32391C51F52BCDCB54C501EA /* Main.storyboard */,
+				5F5D4BC5C1CEF0C32B0A76FD /* SpotCell.swift */,
+				B1F047B8D7D69497DFFA8540 /* Theme.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		25EAF73A41E57D87250D6E0C /* KainSpot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE55ABE280BB6B253AF00706 /* Build configuration list for PBXNativeTarget "KainSpot" */;
+			buildPhases = (
+				9F9E9818FBD1F90DA98FBF32 /* Sources */,
+				84DA4FC98C48C9E61EF094C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KainSpot;
+			packageProductDependencies = (
+			);
+			productName = KainSpot;
+			productReference = 21C2F8B0B44466425B207DDF /* KainSpot.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6928388C43CAE47E5EFE0340 /* KainSpotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5427DCF916A9E7EB5C85424 /* Build configuration list for PBXNativeTarget "KainSpotTests" */;
+			buildPhases = (
+				0A89987C4AD370AB954717E3 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0BCCF861FD090B1E12E23170 /* PBXTargetDependency */,
+			);
+			name = KainSpotTests;
+			packageProductDependencies = (
+			);
+			productName = KainSpotTests;
+			productReference = 505AF5125E2487133C07CA60 /* KainSpotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B22304CFA80DCFBBA4114E02 /* KainSpotUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65437DE0A7B92E8EF1C0103D /* Build configuration list for PBXNativeTarget "KainSpotUITests" */;
+			buildPhases = (
+				A1A11E2E3729DA87C5AC2113 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7DE9766110C447898C9220CA /* PBXTargetDependency */,
+			);
+			name = KainSpotUITests;
+			packageProductDependencies = (
+			);
+			productName = KainSpotUITests;
+			productReference = D1F33ECB0A54E6F79935BED8 /* KainSpotUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A124C23EE57C153DE1CF0000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					25EAF73A41E57D87250D6E0C = {
+						ProvisioningStyle = Automatic;
+					};
+					6928388C43CAE47E5EFE0340 = {
+						ProvisioningStyle = Automatic;
+					};
+					B22304CFA80DCFBBA4114E02 = {
+						ProvisioningStyle = Automatic;
+						TestTargetID = 25EAF73A41E57D87250D6E0C;
+					};
+				};
+			};
+			buildConfigurationList = D289BA9B1F595D9EF57EE949 /* Build configuration list for PBXProject "KainSpot" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = AD0BE75272915D695EC59AEB;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8A7C407DE45F861B11A1DD9E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				25EAF73A41E57D87250D6E0C /* KainSpot */,
+				6928388C43CAE47E5EFE0340 /* KainSpotTests */,
+				B22304CFA80DCFBBA4114E02 /* KainSpotUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84DA4FC98C48C9E61EF094C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76A9FC2DD6928993065439D5 /* Assets.xcassets in Resources */,
+				DC78CEDF4212C6F6EDCAE89C /* LaunchScreen.storyboard in Resources */,
+				CE31BBACE0C0A53DC27790F2 /* Main.storyboard in Resources */,
+				A8424C906551024B81DACE36 /* spots.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0A89987C4AD370AB954717E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEAA2F589E902798B48C182F /* DistanceCalculatorTests.swift in Sources */,
+				F1487C4D26B3605057102728 /* GeminiServiceTests.swift in Sources */,
+				6BF306D1FA7E2870767F4856 /* PhotoStoreTests.swift in Sources */,
+				5409FFA0A6F96EECB06A43B9 /* QueryParserTests.swift in Sources */,
+				AFE90ECE844CC097E398DE45 /* SmartRankerTests.swift in Sources */,
+				C696DCF725FE4544EF7DC50A /* SpotDTODecodingTests.swift in Sources */,
+				EBFF62DD62FE803255701C9D /* SpotFilterTests.swift in Sources */,
+				93D77AF9162060A12A0B6DE8 /* TravelEstimatorTests.swift in Sources */,
+				D73199BB6D5C2C58E59FFBD8 /* UserPrefsTests.swift in Sources */,
+				4F61FBE995CF2813C2EFFEC5 /* VacantPlannerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F9E9818FBD1F90DA98FBF32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C62266D2F169084F38CA0FA /* AppDelegate.swift in Sources */,
+				A2B06B8CF4B0E248B2392647 /* AskViewController.swift in Sources */,
+				A31793B02D8E490060C23974 /* CoreDataStack.swift in Sources */,
+				63EEEB4BAEB00EA43233BFDA /* DistanceCalculator.swift in Sources */,
+				57D2470642C4F36DFBD5FF73 /* GalleryCell.swift in Sources */,
+				7C05DA82FB512F1C45C166D6 /* GalleryViewController.swift in Sources */,
+				53982086EDDB6B5F7AEEAA83 /* GeminiService.swift in Sources */,
+				889F8C0B3B4295E0387ED23C /* HomeViewController.swift in Sources */,
+				C7917ABAB2689810D2461F1F /* KainNavigator.swift in Sources */,
+				6C7C3239ACFDB5D44B6649BE /* KainSpot.xcdatamodeld in Sources */,
+				E8D1F16B8DDF0AFE7B02EE82 /* KeychainStore.swift in Sources */,
+				9F31C8B6762D2D6DF59CC462 /* LocationService.swift in Sources */,
+				4DCA4D2171B828ADDFF2F7C6 /* PhotoStore.swift in Sources */,
+				09979EDB70B1A46A44692334 /* PreferencesViewController.swift in Sources */,
+				F82E79C436D2C69E770CA9A9 /* PriceLevel.swift in Sources */,
+				C313447E9EAA10C8B3F4215D /* QueryParser.swift in Sources */,
+				DF67DF85B0F4A128413339FF /* RouletteViewController.swift in Sources */,
+				15CBEBEC7C1F10FFC7ECD4ED /* SceneDelegate.swift in Sources */,
+				EBCE2D73B7EC562C8253F3A2 /* SettingsViewController.swift in Sources */,
+				9B8AF125D26BDEF7B0D190BC /* SmartRanker.swift in Sources */,
+				483BFAC35BF6339F833EB3D4 /* SpotCell.swift in Sources */,
+				CBFE01CD6DFA74E7876E3829 /* SpotDTO.swift in Sources */,
+				5B8ABA416503752EA42547C3 /* SpotDetailViewController.swift in Sources */,
+				179BD3AE6BF2D4C0BF00A1E9 /* SpotFilter.swift in Sources */,
+				730E0C5E3E4D41FF589D1A42 /* SpotKind.swift in Sources */,
+				355552764E778977AA4C757D /* SpotListViewController.swift in Sources */,
+				C44DE987D98A9225E1F54E96 /* SpotSyncService.swift in Sources */,
+				0FCC957C583434E817A247CA /* Theme.swift in Sources */,
+				34A10B0ADBE2129C03F6D0FE /* TravelEstimator.swift in Sources */,
+				3D4BC342EC8F8D9370F326D5 /* UserPrefs.swift in Sources */,
+				4944CA4814AC6D77890F885D /* VacantPlanner.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1A11E2E3729DA87C5AC2113 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E71DE616F286B906BC912A10 /* KainSpotDemoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0BCCF861FD090B1E12E23170 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25EAF73A41E57D87250D6E0C /* KainSpot */;
+			targetProxy = 6B2284C8F1451EB486175573 /* PBXContainerItemProxy */;
+		};
+		7DE9766110C447898C9220CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25EAF73A41E57D87250D6E0C /* KainSpot */;
+			targetProxy = 76F2DCDD760BE2AD75E34390 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0027B53044D7D0059294153D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kainspot.KainSpotTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KainSpot.app/KainSpot";
+			};
+			name = Debug;
+		};
+		132E1F4ADF8CAA2D70D24173 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1B7B04549E2DBF4A38D0F6F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kainspot.KainSpotTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KainSpot.app/KainSpot";
+			};
+			name = Release;
+		};
+		291B956CCCE33CE1674B49CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = KainSpot/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kainspot.KainSpot;
+				PRODUCT_NAME = KainSpot;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		7F2362B0D131A68BBDAFD526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = KainSpot/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kainspot.KainSpot;
+				PRODUCT_NAME = KainSpot;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		94E9F79B5EDF9EEFD37C960D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kainspot.KainSpotUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = KainSpot;
+			};
+			name = Debug;
+		};
+		AA4F49C5EDE82124E625FEA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kainspot.KainSpotUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = KainSpot;
+			};
+			name = Release;
+		};
+		F739E9DF8061A695D0026BFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		65437DE0A7B92E8EF1C0103D /* Build configuration list for PBXNativeTarget "KainSpotUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94E9F79B5EDF9EEFD37C960D /* Debug */,
+				AA4F49C5EDE82124E625FEA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AE55ABE280BB6B253AF00706 /* Build configuration list for PBXNativeTarget "KainSpot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F2362B0D131A68BBDAFD526 /* Debug */,
+				291B956CCCE33CE1674B49CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C5427DCF916A9E7EB5C85424 /* Build configuration list for PBXNativeTarget "KainSpotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0027B53044D7D0059294153D /* Debug */,
+				1B7B04549E2DBF4A38D0F6F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D289BA9B1F595D9EF57EE949 /* Build configuration list for PBXProject "KainSpot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F739E9DF8061A695D0026BFF /* Debug */,
+				132E1F4ADF8CAA2D70D24173 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		30E383E9E8E4E94424089620 /* KainSpot.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E022AED4CC29A7D30F329FD5 /* KainSpot.xcdatamodel */,
+			);
+			currentVersion = E022AED4CC29A7D30F329FD5 /* KainSpot.xcdatamodel */;
+			path = KainSpot.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = A124C23EE57C153DE1CF0000 /* Project object */;
+}
