@@ -30,6 +30,8 @@ final class SpotListViewController: UIViewController {
     private var filteredSpots: [Spot] = []
     /// What the table shows, best first.
     private var rows: [ScoredSpot] = []
+    /// Switch names that hid every spot (each one, turned off alone, would show spots). Empty when spots exist.
+    private var blockingSwitches: [String] = []
     private var isSyncing = false
     /// Spot ids that already played their entrance animation (animate on first appearance only).
     private var animatedSpotIDs = Set<String>()
@@ -117,6 +119,18 @@ final class SpotListViewController: UIViewController {
     /// Step 1: Core Data does the cheap yes/no checks and the distance check runs in memory (haversine).
     /// Step 2 (rank) orders what is left.
     private func reloadSpots() {
+        filteredSpots = fetchSpots(matching: filter)
+
+        // If nothing matched, find which yes/no switch is hiding everything (e.g. no spot has a
+        // confirmed student discount yet) so the empty message can tell the student what to turn off.
+        blockingSwitches = filteredSpots.isEmpty
+            ? filter.relaxedSwitches().filter { !fetchSpots(matching: $0.filter).isEmpty }.map { $0.name }
+            : []
+        rank()
+    }
+
+    /// Core Data fetch for the database-checkable fields, then the in-memory distance check.
+    private func fetchSpots(matching filter: SpotFilter) -> [Spot] {
         let request = NSFetchRequest<Spot>(entityName: "Spot")
         request.predicate = filter.predicate()
         request.sortDescriptors = [
@@ -131,11 +145,9 @@ final class SpotListViewController: UIViewController {
             print("SpotList fetch failed: \(error.localizedDescription)")
             fetched = []
         }
-
-        filteredSpots = fetched.filter { spot in
+        return fetched.filter { spot in
             filter.matches(distanceKm: KainNavigator.distanceKm(to: spot))
         }
-        rank()
     }
 
     /// Ranks with the current search text (empty text = rank on the saved filter alone).
@@ -153,7 +165,7 @@ final class SpotListViewController: UIViewController {
 
     /// The empty message only makes sense once we are not in the middle of downloading.
     private func updateEmptyState() {
-        emptyLabel.text = "No spots match — try a longer vacant, a bigger budget or a wider distance."
+        emptyLabel.text = SpotFilter.emptyMessage(blocking: blockingSwitches)
         emptyLabel.isHidden = !rows.isEmpty || isSyncing
     }
 

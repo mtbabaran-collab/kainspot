@@ -63,6 +63,40 @@ struct SpotFilter: Equatable {
         return NSCompoundPredicate(andPredicateWithSubpredicates: parts)
     }
 
+    /// Copies of this filter with ONE yes/no switch turned off, so an empty list can say which switch hid everything.
+    /// Only switches that are currently on are returned, in the order they appear on the Plan screen.
+    func relaxedSwitches() -> [(name: String, filter: SpotFilter)] {
+        var result: [(name: String, filter: SpotFilter)] = []
+        if needsWifi {
+            var copy = self
+            copy.needsWifi = false
+            result.append((name: "WiFi", filter: copy))
+        }
+        if studentDiscount {
+            var copy = self
+            copy.studentDiscount = false
+            result.append((name: "Student discount", filter: copy))
+        }
+        if trendingOnly {
+            var copy = self
+            copy.trendingOnly = false
+            result.append((name: "Trending only", filter: copy))
+        }
+        return result
+    }
+
+    /// Text for an empty spot list. `blocking` = names of switches that, turned off alone, would show spots.
+    static func emptyMessage(blocking: [String]) -> String {
+        guard let first = blocking.first else {
+            return "No spots match — try a longer vacant, a bigger budget or a wider distance."
+        }
+        if blocking.count == 1 {
+            return "No spots match with \"\(first)\" on. Go back and turn it off to see spots."
+        }
+        let list = blocking.dropLast().joined(separator: ", ") + " or " + (blocking.last ?? "")
+        return "No spots match these switches. Go back and turn off \(list) to see spots."
+    }
+
     /// In-memory distance check applied after the fetch (inclusive, so a spot exactly on the edge counts).
     func matches(distanceKm: Double) -> Bool {
         distanceKm <= maxDistanceKm

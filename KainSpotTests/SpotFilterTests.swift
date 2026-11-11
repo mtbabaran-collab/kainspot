@@ -107,4 +107,27 @@ final class SpotFilterTests: XCTestCase {
         filter.vacantMinutes = 50
         XCTAssertFalse(filter.fitsVacant(distanceKm: 1.0, stayMinutes: 30))
     }
+
+    /// Each switch that is on gives one relaxed copy with only that switch turned off.
+    func testRelaxedSwitchesTurnOffOneSwitchEach() {
+        var filter = SpotFilter.default
+        filter.needsWifi = true
+        filter.studentDiscount = true
+        filter.trendingOnly = true
+        let relaxed = filter.relaxedSwitches()
+        XCTAssertEqual(relaxed.map { $0.name }, ["WiFi", "Student discount", "Trending only"])
+        XCTAssertFalse(relaxed[1].filter.studentDiscount)
+        XCTAssertTrue(relaxed[1].filter.needsWifi)
+        XCTAssertTrue(relaxed[1].filter.trendingOnly)
+        XCTAssertTrue(SpotFilter.default.relaxedSwitches().isEmpty)
+    }
+
+    /// The empty-list message names the switch that hid everything, or falls back to the general tip.
+    func testEmptyMessageNamesBlockingSwitches() {
+        XCTAssertTrue(SpotFilter.emptyMessage(blocking: []).contains("wider distance"))
+        XCTAssertEqual(SpotFilter.emptyMessage(blocking: ["Student discount"]),
+                       "No spots match with \"Student discount\" on. Go back and turn it off to see spots.")
+        XCTAssertTrue(SpotFilter.emptyMessage(blocking: ["WiFi", "Student discount", "Trending only"])
+            .contains("WiFi, Student discount or Trending only"))
+    }
 }
