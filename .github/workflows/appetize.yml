@@ -1,0 +1,48 @@
+# appetize.yml — builds a Simulator copy of Kain Spot (.app, zipped) that can be uploaded to
+# appetize.io, so the app can be tried in a web browser on a Windows PC.
+# Run it by hand from the Actions tab ("Run workflow"). No API key is baked into the app.
+name: Simulator build for Appetize
+
+on:
+  workflow_dispatch:
+
+jobs:
+  simulator-app:
+    runs-on: macos-15
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select latest Xcode 16.x
+        run: |
+          XCODE_APP=$(ls -d /Applications/Xcode_16*.app | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE_APP/Contents/Developer"
+          xcodebuild -version
+
+      # Universal (Apple silicon + Intel) Simulator build, no code signing needed.
+      - name: Build Simulator app
+        run: |
+          xcodebuild build \
+            -project KainSpot.xcodeproj -scheme KainSpot \
+            -configuration Release -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build/appetize \
+            ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_ALLOWED=NO | tail -20
+
+      - name: Zip the .app
+        run: |
+          cd build/appetize/Build/Products/Release-iphonesimulator
+          ls
+          lipo -info KainSpot.app/KainSpot
+          zip -qry "$GITHUB_WORKSPACE/KainSpot-Simulator.zip" KainSpot.app
+          ls -la "$GITHUB_WORKSPACE/KainSpot-Simulator.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KainSpot-Simulator
+          path: KainSpot-Simulator.zip
